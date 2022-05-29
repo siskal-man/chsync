@@ -57,100 +57,100 @@ mixin textbox-timeinput-auto(id, label, placeholder)
 
 mixin miscoptions
   #cs-miscoptions.tab-pane.active
-    h4 General Settings
+    h4 Общие настройки
     form.form-horizontal(action="javascript:void(0)")
-      +rcheckbox-auto("cs-allow_voteskip", "Allow voteskip")
-      +rcheckbox-auto("cs-allow_dupes", "Allow duplicate videos on the playlist")
-      +textbox-auto("cs-voteskip_ratio", "Voteskip ratio", "0.5")
-      +textbox-auto("cs-maxlength", "Max video length", "HH:MM:SS")
-      +textbox-timeinput-auto("cs-playlist_max_duration_per_user", "Max total queue time per user", "HH:MM:SS")
-      +textbox-auto("cs-afk_timeout", "Auto-AFK Delay", "0 (disabled)")
+      +rcheckbox-auto("cs-allow_voteskip", "Разрешить пропуск голосования")
+      +rcheckbox-auto("cs-allow_dupes", "Разрешить дублирование видео в списке воспроизведения")
+      +textbox-auto("cs-voteskip_ratio", "Соотношение голосов избирателей", "0.5")
+      +textbox-auto("cs-maxlength", "Максимальная длина видео", "HH:MM:SS")
+      +textbox-timeinput-auto("cs-playlist_max_duration_per_user", "Максимальное общее время ожидания в очереди на одного пользователя", "HH:MM:SS")
+      +textbox-auto("cs-afk_timeout", "Автоматическая задержка AFK", "0 (disabled)")
       .form-group
         .col-sm-offset-4
-    h4 Chat Settings
+    h4 Настройки канала
     form.form-horizontal(action="javascript:void(0)")
-      +rcheckbox-auto("cs-enable_link_regex", "Convert URLs in chat to links")
-      +rcheckbox-auto("cs-chat_antiflood", "Throttle chat")
-      +textbox-auto("cs-chat_antiflood_burst", "# of messages allowed before throttling")
-      +textbox-auto("cs-chat_antiflood_sustained", "# of messages (after burst) allowed per second")
-      +textbox-timeinput-auto("cs-new_user_chat_delay", "Delay before new accounts can chat", "0")
+      +rcheckbox-auto("cs-enable_link_regex", "Преобразование URL-адресов в чате в ссылки")
+      +rcheckbox-auto("cs-chat_antiflood", "Throttle chat(узнать перевод)")
+      +textbox-auto("cs-chat_antiflood_burst", "# of messages allowed before throttling(узнать перевод)")
+      +textbox-auto("cs-chat_antiflood_sustained", "# количество сообщений (после пакета), разрешенных в секунду")
+      +textbox-timeinput-auto("cs-new_user_chat_delay", "Задержка до того, как новые учетные записи смогут общаться в чате", "0")
       .form-group
         .col-sm-8.col-sm-offset-4
-          span.text-info Restrictions to new accounts can be disabled by setting the delay to 0.
-      +textbox-timeinput-auto("cs-new_user_chat_link_delay", "Delay before new accounts can post links in chat", "0")
+          span.text-info Ограничения для новых учетных записей можно отключить, установив задержку в 0.
+      +textbox-timeinput-auto("cs-new_user_chat_link_delay", "Задержка до того, как новые учетные записи смогут размещать ссылки в чате", "0")
       .form-group
         .col-sm-8.col-sm-offset-4
-          span.text-info Changes are automatically saved.
+          span.text-info Изменения сохраняются автоматически.
 
 mixin adminoptions
   #cs-adminoptions.tab-pane
-    h4 Admin-Only Settings
+    h4 Настройки только для администратора
     form.form-horizontal(action="javascript:void(0)")
       - var defname = `CyTube - /${channelPath}/${channelName}`
-      +textbox-auto("cs-pagetitle", "Page title", defname)
-      +textbox-auto("cs-password", "Password", "leave blank to disable")
-      +textbox-auto("cs-externalcss", "External CSS", "Stylesheet URL")
-      +textbox-auto("cs-externaljs", "External Javascript", "Script URL")
-      +rcheckbox-auto("cs-show_public", "List channel publicly")
-      +rcheckbox-auto("cs-torbanned", "Block connections from Tor")
-      +rcheckbox-auto("cs-block_anonymous_users", "Block anonymous users")
-      +rcheckbox-auto("cs-allow_ascii_control", "Allow ASCII control characters (e.g. newlines)")
-      +textbox-auto("cs-playlist_max_per_user", "Maximum # of videos per user")
+      +textbox-auto("cs-pagetitle", "Заголовок страницы", defname)
+      +textbox-auto("cs-password", "Пароль", "leave blank to disable")
+      +textbox-auto("cs-externalcss", "Внешний CSS файл", "Stylesheet URL")
+      +textbox-auto("cs-externaljs", "Внешний Javascript скрипт", "Script URL")
+      //- +rcheckbox-auto("cs-show_public", "List channel publicly")
+      +rcheckbox-auto("cs-torbanned", "Блокировать соединения из Tor")
+      +rcheckbox-auto("cs-block_anonymous_users", "Блокировать анонимных пользователей")
+      +rcheckbox-auto("cs-allow_ascii_control", "Разрешить управляющие символы ASCII (например, новые строки)")
+      +textbox-auto("cs-playlist_max_per_user", "Maximum # of videos per user(надо узнать что это)")
       .form-group
         .col-sm-8.col-sm-offset-4
-          span.text-info Set to 0 for no limit
+          span.text-info Установите значение 0 чтобы убрать ограничение
       .form-group
         .col-sm-8.col-sm-offset-4
-          span.text-info Changes are automatically saved.
+          span.text-info Изменения сохраняются автоматически.
 
 mixin motdeditor
   #cs-motdeditor.tab-pane
-    h4 MOTD editor
-    p The MOTD can be formatted using a subset of HTML.  Tags which attempt to execute Javascript will be removed.
+    h4 MOTD редактор
+    p MOTD может быть отформатирован с использованием подмножества HTML. Теги, которые пытаются выполнить Javascript, будут удалены.
     textarea.form-control#cs-motdtext(rows="10")
-    button.btn.btn-primary#cs-motdsubmit Save MOTD
+    button.btn.btn-primary#cs-motdsubmit Сохранить MOTD
 
 mixin csseditor
   #cs-csseditor.tab-pane
-    h4 CSS editor
-    p Maximum size 20KB.  If more space is required, use the External CSS option under General Settings to link to an externally hosted stylesheet.
+    h4 CSS редактор
+    p Максимальный размер 20 КБ. Если требуется больше места, используйте опцию External CSS в разделе Общие настройки для ссылки на внешнюю таблицу стилей.
     textarea.form-control#cs-csstext(rows="10")
-    button.btn.btn-primary#cs-csssubmit Save CSS
+    button.btn.btn-primary#cs-csssubmit Сохранить CSS
 
 mixin jseditor
   #cs-jseditor.tab-pane
-    h4 JS editor
-    p Maximum size 20KB.  If more space is required, use the External JS option under General Settings to link to an externally hosted stylesheet.
+    h4 JS редактор
+    p Максимальный размер 20 КБ. Если требуется больше места, используйте опцию External JS в разделе Общие настройки для ссылки на внешнюю таблицу стилей.
     textarea.form-control#cs-jstext(rows="10")
-    button.btn.btn-primary#cs-jssubmit Save JS
+    button.btn.btn-primary#cs-jssubmit Сохранить JS
 
 mixin banlist
   #cs-banlist.tab-pane
-    h4 Ban list
+    h4 Список забаненных
     table.table.table-striped
       thead
         tr
-          th Unban
+          th Статус
           th IP
-          th Name
-          th Banned by
+          th Логин
+          th Был забанен
 
 mixin recentjoins
   #cs-recentjoins.tab-pane
-    h4 Recent connections
+    h4 Недавние подключения
     table.table.table-striped
       thead
         tr
-          th Name
-          th Aliases
-          th Time
+          th Логин
+          th Псевдонимы
+          th Время
 
 mixin chanranks
   #cs-chanranks.tab-pane
-    h4 Moderator List
+    h4 Список модераторов
     form.form-inline(action="javascript:void(0)", role="form")
       .input-group
-        input#cs-chanranks-name.form-control(type="text", placeholder="Name")
+        input#cs-chanranks-name.form-control(type="text", placeholder="Логин")
         span.input-group-btn
           button#cs-chanranks-mod.btn.btn-success +Mod
           button#cs-chanranks-adm.btn.btn-info +Admin
@@ -158,71 +158,71 @@ mixin chanranks
     table.table.table-striped
       thead
         tr
-          th Name
-          th Rank
+          th Логин
+          th Ранг
 
 mixin chatfilters
   #cs-chatfilters.tab-pane
-    h4 Chat Filters
+    h4 Фильтры чата
     form.form-horizontal(action="javascript:void(0)", role="form")
-      +textbox("cs-chatfilters-newname", "Filter name")
-      +textbox("cs-chatfilters-newregex", "Filter regex")
+      +textbox("cs-chatfilters-newname", "Имя фильтра")
+      +textbox("cs-chatfilters-newregex", "Регулярное выражение фильтра")
       .form-group
-        label.control-label.col-sm-4(for="cs-chatfilters-newflags") Flags
+        label.control-label.col-sm-4(for="cs-chatfilters-newflags") Флаги
         .col-sm-8
           input#cs-chatfilters-newflags.form-control.cs-textbox(type="text", value="g")
-      +textbox("cs-chatfilters-newreplace", "Replacement")
+      +textbox("cs-chatfilters-newreplace", "Заменить на")
       .form-group
         .col-sm-8.col-sm-offset-4
-          button#cs-chatfilters-newsubmit.btn.btn-primary Create Filter
+          button#cs-chatfilters-newsubmit.btn.btn-primary Создать фильтр
     table.table.table-striped.table-condensed
       thead
         tr
-          th Control
-          th Name
-          th Active
+          th Управление
+          th Название
+          th Активен/Неактивен
 
-    button#cs-chatfilters-export.btn.btn-default Export filter list
-    button#cs-chatfilters-import.btn.btn-default Import filter list
+    button#cs-chatfilters-export.btn.btn-default Экспортировать спискок фильтров
+    button#cs-chatfilters-import.btn.btn-default Импортировать спискок фильтров
     textarea#cs-chatfilters-exporttext.form-control(rows="5")
 
 mixin emotes
   #cs-emotes.tab-pane
-    h4 Emotes
+    h4 Эмоции(эмоджи, гифки и т.д.)
     form.form-horizontal(action="javascript:void(0)", role="form")
-      +textbox("cs-emotes-newname", "Emote name")
-      +textbox("cs-emotes-newimage", "Emote image")
+      +textbox("cs-emotes-newname", "Название эмоции")
+      +textbox("cs-emotes-newimage", "URL-адрес")
       .form-group
         .col-sm-8.col-sm-offset-4
-          button#cs-emotes-newsubmit.btn.btn-primary Create Emote
+          button#cs-emotes-newsubmit.btn.btn-primary Добавить эмоцию
     form.form-inline
       .form-group
-        input.emotelist-search.form-control(type="text", placeholder="Search")
+        input.emotelist-search.form-control(type="text", placeholder="Поиск")
       .form-group
         .checkbox
           label
             input.emotelist-alphabetical(type="checkbox")
-            | Sort alphabetically
+            | Сортировка по алфавиту
     .emotelist-paginator-container
     table.emotelist-table.table.table-striped.table-condensed
       thead
         tr
-          th Delete
-          th Name
-          th Image
+          th Удалить
+          th Название
+          th URL
       tbody
 
-    button#cs-emotes-export.btn.btn-default Export emote list
-    button#cs-emotes-import.btn.btn-default Import emote list
+    button#cs-emotes-export.btn.btn-default Экспортировать список эмоций
+    button#cs-emotes-import.btn.btn-default Импортировать список эмоций
     textarea#cs-emotes-exporttext.form-control(rows="5")
 
 mixin chanlog
   #cs-chanlog.tab-pane
-    h4 Channel Log
-    strong Filter Log:
+    h4 Логи канала
+    strong Фильтр:
     select#cs-chanlog-filter.form-control(multiple="multiple")
     pre#cs-chanlog-text
-    button.btn.btn-default#cs-chanlog-refresh Refresh
+    button.btn.btn-default#cs-chanlog-refresh Обновить
 
 mixin permeditor
   #cs-permedit.tab-pane

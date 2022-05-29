@@ -2,46 +2,43 @@ extends layout.pug
 
 block content
   .col-md-8.col-md-offset-2
-    h1 Google Drive Userscript
-    h2 Disclaimer
+    h1 Пользовательский скрипт Google Диска
+    h2 Дисклеймер
     .alert.alert-danger.messagebox
       strong Unsupported
       p.
-        This functionality is provided <strong>as-is</strong> for backwards
-        compatibility for existing users for whom it already is known to work.
-        There are many reasons, known and unknown, for which it may
-        <strong>not</strong> work for you; please note the staff in CyTube
-        support channels cannot provide any troubleshooting assistance and you
-        will be asked to simply use a different video provider.
+        Эта функциональность предоставляется <strong>как-есть</strong> для обратной совместимости для существующих пользователей, 
+        для которых, как известно, это уже работает.
+        Есть много причин, известных и неизвестных, по которым это может
+        <strong>не</strong> сработать для вас; пожалуйста, обратите внимание, что сотрудники каналов поддержки CyTube не могут оказать никакой помощи в устранении неполадок, 
+        и вам будет предложено просто использовать другого поставщика видео.
       p.
-        This functionality was originally added so that users could share their
-        own personal videos stored in their Drive.  No support whatsoever will
-        be provided to users attempting to use it to circumvent copyright
-        restrictions on third-party video hosts.
-    h2 How It Works
+        Эта функция изначально была добавлена для того, чтобы пользователи могли делиться своими личными видео, 
+        хранящимися на их диске. Никакая поддержка не будет оказана пользователям, 
+        пытающимся использовать его для обхода ограничений авторских прав на сторонних видеохостингах.
+    h2 Как это работает
     p.
-      The userscript is a short script that you can install using a browser
-      extension such as Greasemonkey or Tampermonkey that runs on the page
-      and provides additional functionality needed to play Google Drive
-      videos.
-    h2 Installation
+      Пользовательский скрипт - это короткий скрипт, который вы можете установить с помощью расширения браузера, 
+      такого как Greasemonkey или Tampermonkey, который запускается на странице и предоставляет дополнительные функции, 
+      необходимые для воспроизведения видео с Google Диска.
+    h2 Установка
     ul
       li
         strong Chrome
-        | &mdash;Install <a href="https://chrome.google.com/webstore/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo" target="_blank">Tampermonkey</a>.
+        | &mdash;Установите <a href="https://chrome.google.com/webstore/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo" target="_blank">Tampermonkey</a>.
       li
         strong Firefox
-        | &mdash;Install <a href="https://addons.mozilla.org/en-US/firefox/addon/tampermonkey/" target="_blank">Tampermonkey</a>
-        | or <a href="https://addons.mozilla.org/en-US/firefox/addon/greasemonkey/" target="_blank">Greasemonkey</a>.
+        | &mdash;Установите <a href="https://addons.mozilla.org/en-US/firefox/addon/tampermonkey/" target="_blank">Tampermonkey</a>
+        | или <a href="https://addons.mozilla.org/en-US/firefox/addon/greasemonkey/" target="_blank">Greasemonkey</a>.
       li
-        strong Other Browsers
-        | &mdash;Install the appropriate userscript plugin for your browser.
-        | Tampermonkey supports many browsers besides Chrome.
+        strong Другие браузеры
+        | &mdash;Установите соответствующий плагин userscript для вашего браузера.
+        | Tampermonkey поддерживает многие браузеры, помимо Chrome.
     p.
-      Once you have installed the userscript manager addon for your browser,
-      you can <a href="/js/cytube-google-drive.user.js" target="_blank">
-      install the userscript</a>.  If this link 404s, it means the administrator
-      of this server hasn't generated it yet.
+      После того, как вы установили дополнение userscript manager для своего браузера,
+      вы можете <a href="/js/cytube-google-drive.user.js" target="_blank">
+      установите пользовательский скрипт</a>.  Если эта ссылка выдает код 404, 
+      это означает, что администратор этого сервера еще не сгенерировал ее.
     p.
-      You can find a guide with screenshots of the installation process
-      <a href="https://github.com/calzoneman/sync/wiki/Google-Drive-Userscript-Installation-Guide" target="_blank">on GitHub</a>.
+      Вы можете найти руководство со скриншотами процесса установки
+      <a href="https://github.com/calzoneman/sync/wiki/Google-Drive-Userscript-Installation-Guide" target="_blank">на GitHub</a>.

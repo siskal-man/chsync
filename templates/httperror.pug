@@ -1,16 +1,16 @@
 extends layout.pug
 
 mixin notfound()
-  h1 Not Found
-  p The page you were looking for doesn't seem to exist.  Please check that you typed the URL correctly.
+  h1 Не найдено
+  p Страница, которую вы искали, похоже, не существует. Пожалуйста, убедитесь, что вы правильно ввели URL-адрес.
   if message
-    p Reason: #{message}
+    p Причина: #{message}
 mixin forbidden()
-  h1 Forbidden
-  p You don't have permission to access <code>#{path}</code>
+  h1 Запрет
+  p У вас нет разрешения на доступ к <code>#{path}</code>
 mixin genericerror()
-  h1 Oops
-  p Your request could not be processed.  Status code: <code>#{status}</code>, message: <code>#{message}</code>
+  h1 Ой
+  p Ваш запрос не может быть обработан.  Код состояния: <code>#{status}</code>, сообщение: <code>#{message}</code>
 
 block content
   .col-md-12

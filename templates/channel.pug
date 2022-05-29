@@ -14,14 +14,14 @@ html(lang="en")
         #nav-collapsible.collapse.navbar-collapse
           ul.nav.navbar-nav
             +navdefaultlinks()
-            li: a(href="javascript:void(0)", onclick="javascript:showUserOptions()") Options
-            li: a#showchansettings(href="javascript:void(0)", onclick="javascript:showChannelSettings()") Channel Settings
+            li: a(href="javascript:void(0)", onclick="javascript:showUserOptions()") Опции
+            li: a#showchansettings(href="javascript:void(0)", onclick="javascript:showChannelSettings()") Настройки канала
             li.dropdown
-              a.dropdown-toggle(href="#", data-toggle="dropdown") Layout
+              a.dropdown-toggle(href="#", data-toggle="dropdown") Макет
                 b.caret
               ul.dropdown-menu
-                li: a(href="#" onclick="javascript:chatOnly()") Chat Only
-                li: a(href="#" onclick="javascript:removeVideo(event)") Remove Video
+                li: a(href="#" onclick="javascript:chatOnly()") Оставить только чат
+                li: a(href="#" onclick="javascript:removeVideo(event)") Удалить видеоплеер
             +navsuperadmin(true)
           +navloginlogout()
       section#mainpage
@@ -41,50 +41,50 @@ html(lang="en")
             #chatwrap.col-lg-5.col-md-5
               #chatheader
                 i#userlisttoggle.glyphicon.glyphicon-chevron-down.pull-left.pointer(title="Show/Hide Userlist")
-                span#usercount.pointer Not Connected
+                span#usercount.pointer Не подключен
                 span#modflair.label.label-default.pull-right.pointer Name Color
               #userlist
               #messagebuffer.linewrap
               form(action="javascript:void(0)")
                 input#chatline.form-control(type="text", maxlength="320", style="display: none")
                 #guestlogin.input-group
-                  span.input-group-addon Guest login
+                  span.input-group-addon Войти как гость
                   input#guestname.form-control(type="text", placeholder="Name")
             #videowrap.col-lg-7.col-md-7
               p#videowrap-header
                 span#resize-video-smaller.glyphicon.glyphicon-minus.pointer(title="Make the video smaller")
                 span#resize-video-larger.glyphicon.glyphicon-plus.pointer(title="Make the video larger")
-                span#currenttitle Nothing Playing
+                span#currenttitle Ничего не играет
               .embed-responsive.embed-responsive-16by9
                 #ytapiplayer.embed-responsive-item
           #controlsrow.row
             #leftcontrols.col-lg-5.col-md-5
-              button#newpollbtn.btn.btn-sm.btn-default New Poll
-              button#emotelistbtn.btn.btn-sm.btn-default Emote List
+              button#newpollbtn.btn.btn-sm.btn-default Новый опрос
+              button#emotelistbtn.btn.btn-sm.btn-default Список эмоций
             #rightcontrols.col-lg-7.col-md-7
               #plcontrol.btn-group
-                button#showsearch.btn.btn-sm.btn-default(title="Search for a video", data-toggle="collapse", data-target="#searchcontrol")
+                button#showsearch.btn.btn-sm.btn-default(title="Поиск видео", data-toggle="collapse", data-target="#searchcontrol")
                   span.glyphicon.glyphicon-search
-                button#showmediaurl.btn.btn-sm.btn-default(title="Add video from URL", data-toggle="collapse", data-target="#addfromurl")
+                button#showmediaurl.btn.btn-sm.btn-default(title="Добавить видео с URL-адреса", data-toggle="collapse", data-target="#addfromurl")
                   span.glyphicon.glyphicon-plus
-                button#showcustomembed.btn.btn-sm.btn-default(title="Embed a custom frame", data-toggle="collapse", data-target="#customembed")
+                button#showcustomembed.btn.btn-sm.btn-default(title="Встраивание пользовательского фрейма", data-toggle="collapse", data-target="#customembed")
                   span.glyphicon.glyphicon-th-large
-                button#showplaylistmanager.btn.btn-sm.btn-default(title="Manage playlists", data-toggle="collapse", data-target="#playlistmanager")
+                button#showplaylistmanager.btn.btn-sm.btn-default(title="Управление плейлистом", data-toggle="collapse", data-target="#playlistmanager")
                   span.glyphicon.glyphicon-list
-                button#clearplaylist.btn.btn-sm.btn-default(title="Clear the playlist")
+                button#clearplaylist.btn.btn-sm.btn-default(title="Очистить плейлист")
                   span.glyphicon.glyphicon-trash
-                button#shuffleplaylist.btn.btn-sm.btn-default(title="Shuffle the playlist")
+                button#shuffleplaylist.btn.btn-sm.btn-default(title="Перемешать плейлист")
                   span.glyphicon.glyphicon-sort
-                button#qlockbtn.btn.btn-sm.btn-danger(title="Playlist locked")
+                button#qlockbtn.btn.btn-sm.btn-danger(title="Заблокировать плейлист")
                   span.glyphicon.glyphicon-lock
               #videocontrols.btn-group.pull-right
-                button#mediarefresh.btn.btn-sm.btn-default(title="Reload the video player")
+                button#mediarefresh.btn.btn-sm.btn-default(title="Перезагрузить видеоплеер")
                   span.glyphicon.glyphicon-retweet
-                button#fullscreenbtn.btn.btn-sm.btn-default(title="Make the video player fullscreen")
+                button#fullscreenbtn.btn.btn-sm.btn-default(title="Сделайть видеоплеер полноэкранным")
                   span.glyphicon.glyphicon-fullscreen
-                button#getplaylist.btn.btn-sm.btn-default(title="Retrieve playlist links")
+                button#getplaylist.btn.btn-sm.btn-default(title="Извлечень ссылоки из плейлиста")
                   span.glyphicon.glyphicon-link
-                button#voteskip.btn.btn-sm.btn-default(title="Voteskip")
+                button#voteskip.btn.btn-sm.btn-default(title="Следующее видео")
                   span.glyphicon.glyphicon-step-forward
 
           #playlistrow.row
@@ -99,59 +99,59 @@ html(lang="en")
                   .input-group
                     input#library_query.form-control(type="text", placeholder="Search query")
                     span.input-group-btn
-                      button#library_search.btn.btn-default Library
+                      button#library_search.btn.btn-default Библиотека
                     span.input-group-btn
                       button#youtube_search.btn.btn-default YouTube
                   .checkbox
                     label
                       input.add-temp(type="checkbox")
-                      | Add as temporary
+                      | Добавить как временный
                   ul#library.videolist.col-lg-12.col-md-12
                 #addfromurl.collapse.plcontrol-collapse.col-lg-12.col-md-12
                   .vertical-spacer
                   .input-group
                     input#mediaurl.form-control(type="text", placeholder="Media URL")
                     span.input-group-btn
-                      button#queue_next.btn.btn-default Queue next
+                      button#queue_next.btn.btn-default Следующее
                     span.input-group-btn
-                      button#queue_end.btn.btn-default Queue last
+                      button#queue_end.btn.btn-default Последнее
                   .checkbox
                     label
                       input.add-temp(type="checkbox")
-                      | Add as temporary
+                      | Добавить как временный
                   div#addfromurl-queue
                 #customembed.collapse.plcontrol-collapse.col-lg-12.col-md-12
                   .vertical-spacer
                   .input-group
                     input#customembed-title.form-control(type="text", placeholder="Title (optional)")
                     span.input-group-btn
-                      button#ce_queue_next.btn.btn-default Queue next
+                      button#ce_queue_next.btn.btn-default Следующее
                     span.input-group-btn
-                      button#ce_queue_end.btn.btn-default Queue last
+                      button#ce_queue_end.btn.btn-default Последнее
                   .checkbox
                     label
                       input.add-temp(type="checkbox")
-                      | Add as temporary
-                  | Paste the embed code below and click Next or At End.
-                  | Acceptable embed codes are <code>&lt;iframe&gt;</code> and <code>&lt;object&gt;</code> tags.  <strong>CUSTOM EMBEDS CANNOT BE SYNCHRONIZED.</strong>
+                      | Добавить как временный
+                  | Вставьте приведенный ниже код и нажмите кнопку Далее или В конце.
+                  | Допустимыми кодами для встраивания являются <code>&lt;iframe&gt;</code> и <code>&lt;object&gt;</code> теги.  <strong>ПОЛЬЗОВАТЕЛЬСКИЕ ВСТАВКИ НЕ МОГУТ БЫТЬ СИНХРОНИЗИРОВАНЫ.</strong>
                   textarea#customembed-content.input-block-level.form-control(rows="3")
                 #playlistmanager.collapse.plcontrol-collapse.col-lg-12.col-md-12
                   .vertical-spacer
                   .input-group
                     input#userpl_name.form-control(type="text", placeholder="Playlist Name")
                     span.input-group-btn
-                      button#userpl_save.btn.btn-default Save
+                      button#userpl_save.btn.btn-default Сохранить
                   .checkbox
                     label
                       input.add-temp(type="checkbox")
-                      | Add as temporary
+                      | Добавить как временный
                   ul#userpl_list.videolist
                 #queuefail.col-lg-12.col-md-12
                   .vertical-spacer
                 .col-lg-12.col-md-12
                   ul#queue.videolist
                   #plmeta
-                    span#plcount 0 items
+                    span#plcount 0 элементов
                     span#pllength 00:00:00
           #resizewrap.row
             .col-lg-5.col-md-5
@@ -163,13 +163,13 @@ html(lang="en")
         .modal-content
           .modal-header
             button.close(data-dismiss="modal", aria-hidden="true") &times;
-            h4 User Preferences
+            h4 Пользовательские настройки
             ul.nav.nav-tabs
-              li: a(href="#us-general", data-toggle="tab") General
-              li: a(href="#us-playback", data-toggle="tab") Playback
-              li: a(href="#us-chat", data-toggle="tab") Chat
-              li: a(href="#us-scriptcontrol", data-toggle="tab") Script Access
-              li: a(href="#us-mod", data-toggle="tab", style="") Moderator
+              li: a(href="#us-general", data-toggle="tab") Общие
+              li: a(href="#us-playback", data-toggle="tab") Воспроизведение
+              li: a(href="#us-chat", data-toggle="tab") Чат
+              li: a(href="#us-scriptcontrol", data-toggle="tab") Доступ к сценарию
+              li: a(href="#us-mod", data-toggle="tab", style="") Модерирование
           .modal-body
             .tab-content
               include useroptions
@@ -179,14 +179,14 @@ html(lang="en")
               +us-scripts()
               +us-mod()
           .modal-footer
-            button.btn.btn-primary(type="button", data-dismiss="modal", onclick="javascript:saveUserOptions()") Save
-            button.btn.btn-default(type="button", data-dismiss="modal") Close
+            button.btn.btn-primary(type="button", data-dismiss="modal", onclick="javascript:saveUserOptions()") Сохранить
+            button.btn.btn-default(type="button", data-dismiss="modal") Закрыть
     #emotelist.modal.fade(tabindex="-1", role="dialog", aria-hidden="true")
       .modal-dialog.modal-dialog-nonfluid
         .modal-content
           .modal-header
             button.close(data-dismiss="modal", aria-hidden="true") &times;
-            h4 Emote List
+            h4 Список эмоций
           .modal-body
             .pull-left
               input.emotelist-search.form-control(type="text", placeholder="Search")
@@ -194,7 +194,7 @@ html(lang="en")
               .checkbox
                 label
                   input.emotelist-alphabetical(type="checkbox")
-                  | Sort alphabetically
+                  | Сортировка по алфавиту
             .emotelist-paginator-container
             table.emotelist-table
               tbody
@@ -204,23 +204,23 @@ html(lang="en")
         .modal-content
           .modal-header
             button.close(data-dismiss="modal", aria-hidden="true") &times;
-            h4 Channel Settings
+            h4 Настройки канала
             ul.nav.nav-tabs
-              li.active: a(href="#cs-miscoptions", data-toggle="tab") General Settings
-              li: a(href="#cs-adminoptions", data-toggle="tab") Admin Settings
+              li.active: a(href="#cs-miscoptions", data-toggle="tab") Общие настройки
+              li: a(href="#cs-adminoptions", data-toggle="tab") Настройки администратора
               li.dropdown
-                a#cs-edit-dd-toggle(href="#", data-toggle="dropdown") Edit
+                a#cs-edit-dd-toggle(href="#", data-toggle="dropdown") Редактировать
                   span.caret
                 ul.dropdown-menu
-                  li: a(href="#cs-chatfilters", data-toggle="tab", onclick="javascript:socket.emit('requestChatFilters')") Chat Filters
-                  li: a(href="#cs-emotes", data-toggle="tab") Emotes
+                  li: a(href="#cs-chatfilters", data-toggle="tab", onclick="javascript:socket.emit('requestChatFilters')") Фильтры чата
+                  li: a(href="#cs-emotes", data-toggle="tab") Эмоции
                   li: a(href="#cs-motdeditor", data-toggle="tab", tabindex="-1") MOTD
                   li: a(href="#cs-csseditor", data-toggle="tab", tabindex="-1") CSS
                   li: a(href="#cs-jseditor", data-toggle="tab", tabindex="-1") Javascript
-                  li: a(href="#cs-permedit", data-toggle="tab", tabindex="-1") Permissions
-                  li: a(href="#cs-chanranks", data-toggle="tab", tabindex="-1", onclick="javascript:socket.emit('requestChannelRanks')") Moderators
-              li: a(href="#cs-banlist", data-toggle="tab", tabindex="-1", onclick="javascript:socket.emit('requestBanlist')") Ban list
-              li: a(href="#cs-chanlog", data-toggle="tab", onclick="javascript:socket.emit('readChanLog')") Log
+                  li: a(href="#cs-permedit", data-toggle="tab", tabindex="-1") Разрешения
+                  li: a(href="#cs-chanranks", data-toggle="tab", tabindex="-1", onclick="javascript:socket.emit('requestChannelRanks')") Модераторы
+              li: a(href="#cs-banlist", data-toggle="tab", tabindex="-1", onclick="javascript:socket.emit('requestBanlist')") Список забаненных
+              li: a(href="#cs-chanlog", data-toggle="tab", onclick="javascript:socket.emit('readChanLog')") Логи
           .modal-body
             .tab-content
               include channeloptions
@@ -237,7 +237,7 @@ html(lang="en")
               +chanlog()
               +permeditor()
           .modal-footer
-            button.btn.btn-default(type="button", data-dismiss="modal") Close
+            button.btn.btn-default(type="button", data-dismiss="modal") Закрыть
     #pmbar
     include footer
     +footer()

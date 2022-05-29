@@ -435,7 +435,7 @@ Callbacks = {
             $("<a/>").addClass("dropdown-toggle")
                 .attr("data-toggle", "dropdown")
                 .attr("href", "javascript:void(0)")
-                .html("Set Rank <b class='caret'></b>")
+                .html("Дать привелегии <b class='caret'></b>")
                 .appendTo(li);
             var menu = $("<ul/>").addClass("dropdown-menu")
                 .appendTo(li);
@@ -844,7 +844,7 @@ Callbacks = {
             $("#voteskip").attr("disabled", false);
         }
 
-        $("#currenttitle").text("Currently Playing: " + data.title);
+        $("#currenttitle").text("В настоящее время проигрывается: " + data.title);
     },
 
     mediaUpdate: function(data) {

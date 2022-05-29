@@ -31,13 +31,13 @@ function addMenuItem(target, text) {
         });
 };
 
-addMenuItem("#acp-logview", "Log Viewer");
-addMenuItem("#acp-announcements", "Announcements");
-addMenuItem("#acp-global-bans", "Global Bans");
-addMenuItem("#acp-user-lookup", "Users");
-addMenuItem("#acp-channel-lookup", "Channels");
-addMenuItem("#acp-loaded-channels", "Active Channels");
-addMenuItem("#acp-eventlog", "Event Log");
+addMenuItem("#acp-logview", "Логи");
+addMenuItem("#acp-announcements", "Объявления");
+addMenuItem("#acp-global-bans", "Список заблокированных IP-адресов");
+addMenuItem("#acp-user-lookup", "Пользователи");
+addMenuItem("#acp-channel-lookup", "Каналы");
+addMenuItem("#acp-loaded-channels", "Активные каналы");
+addMenuItem("#acp-eventlog", "Логи событий");
 
 /* Log Viewer */
 function readSyslog() {

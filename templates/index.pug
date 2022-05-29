@@ -1,24 +1,24 @@
 extends layout.pug
 
 block content
-  .col-lg-9.col-md-9
-    h3 Public Channels
-    table.table.table-bordered.table-striped
-      thead
-        th Channel
-        th # Connected
-        th Now Playing
-      tbody
-        each chan in channels
-          tr
-            td: a(href=`/${channelPath}/${chan.name}`) #{chan.pagetitle} (#{chan.name})
-            td= chan.usercount
-            td= chan.mediatitle
+  //- .col-lg-9.col-md-9
+  //-   h3 Public Channels
+  //-   table.table.table-bordered.table-striped
+  //-     thead
+  //-       th Channel
+  //-       th # Connected
+  //-       th Now Playing
+  //-     tbody
+  //-       each chan in channels
+  //-         tr
+  //-           td: a(href=`/${channelPath}/${chan.name}`) #{chan.pagetitle} (#{chan.name})
+  //-           td= chan.usercount
+  //-           td= chan.mediatitle
   .col-lg-3.col-md-3
-    h3 Enter Channel
-    input#channelname.form-control(type="text", placeholder="Channel Name")
+    h3 Поиск канала
+    input#channelname.form-control(type="text", placeholder="Название канала")
     if superadmin
-      p.text-muted New channels can be registered from the <a href="/account/channels">My Channels</a> page.
+      p.text-muted Новые каналы можно зарегистрировать на странице <a href="/account/channels">"Мои каналы".</a>
 
 append footer
   script(type="text/javascript").

@@ -5,10 +5,10 @@ mixin email(e, k)
 
 block content
   .col-md-8.col-md-offset-2
-    h1 Contact
+    h1 Контакты
     h3 Email
     if contacts.length == 0
-      p No contacts listed.
+      p Контактов в списке нет.
     else
       each contact in contacts
         strong= contact.name

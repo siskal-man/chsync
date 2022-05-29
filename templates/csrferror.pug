@@ -3,13 +3,13 @@ extends layout.pug
 block content
   .col-md-12
     .alert.alert-danger
-      h1 Invalid Session
-      p Your browser attempted to submit form data to <code>#{path}</code> with an invalid authentication token.  This may be because:
+      h1 Недействительная сессия
+      p Ваш браузер попытался отправить данные формы в <code>#{path}</code> с недопустимым токеном аутентификации.  Это может быть связано с тем, что:
         ul
-          li Your session has expired
-          li Your request was missing the authentication token
-          li A malicious user has attempted to tamper with your session
-          li Your browser does not support cookies, or they are not enabled
-        | If the problem persists, please contact an administrator.
+          li Срок действия вашего сеанса истек
+          li В вашем запросе отсутствовал токен аутентификации
+          li Злоумышленник попытался вмешаться в ваш сеанс
+          li Ваш браузер не поддерживает файлы cookie или они не включены
+        | Если проблема не устранена, пожалуйста, обратитесь к администратору.
       if referer
-        a(href=referer) Return to previous page
+        a(href=referer) Вернуться на предыдущую страницу

@@ -4,8 +4,8 @@ block content
   if !loggedIn
     .col-lg-6.col-lg-offset-3.col-md-6.col-md-offset-3
       .alert.alert-danger.messagebox.center
-        strong Authorization Required
-        p You must be <a href="/login">logged in</a> to view this page.
+        strong Требуется авторизация
+        p Вы должны <a href="/login">войти в систему,</a> чтобы иметь доступ к этой странице.
   else
     .col-lg-6.col-lg-offset-3.col-md-6.col-md-offset-3
       if successMessage
@@ -14,38 +14,38 @@ block content
       else if errorMessage
         .alert.alert-danger.center
           p= errorMessage
-      h3 Change Password
+      h3 Изменить пароль
       form(action="/account/edit", method="post", onsubmit="return validatePasswordChange()")
         input(type="hidden", name="_csrf", value=csrfToken)
         input(type="hidden", name="action", value="change_password")
         .form-group
-          label.control-label(for="username") Username
+          label.control-label(for="username") Логин
           input#username.form-control(type="text", name="name", value=loginName, disabled=true)
         .form-group
-          label.control-label(for="oldpassword") Current Password
+          label.control-label(for="oldpassword") Текущий пароль
           input#oldpassword.form-control(type="password", name="oldpassword")
         .form-group
-          label.control-label(for="newpassword") New Password
+          label.control-label(for="newpassword") Новый пароль
           input#newpassword.form-control(type="password", name="newpassword")
         .form-group
-          label.control-label(for="newpassword_confirm") Confirm New Password
+          label.control-label(for="newpassword_confirm") Подтвердите новый пароль
           input#newpassword_confirm.form-control(type="password", name="newpassword_confirm")
-        button#changepassbtn.btn.btn-danger.btn-block(type="submit") Change Password
+        button#changepassbtn.btn.btn-danger.btn-block(type="submit") Изменить пароль
       hr
-      h3 Change Email
+      h3 Изменить адрес электронной почты
       form(action="/account/edit", method="post", onsubmit="return submitEmail()")
         input(type="hidden", name="_csrf", value=csrfToken)
         input(type="hidden", name="action", value="change_email")
         .form-group
-          label.control-label(for="username2") Username
+          label.control-label(for="username2") Логин
           input#username2.form-control(type="text", name="name", value=loginName, disabled=true)
         .form-group
-          label.control-label(for="password2") Password
+          label.control-label(for="password2") Пароль
           input#password2.form-control(type="password", name="password")
         .form-group
-          label.control-label(for="email") New Email
+          label.control-label(for="email") Новый адрес электронной почты
           input#email.form-control(type="email", name="email")
-        button#changeemailbtn.btn.btn-danger.btn-block(type="submit") Change Email
+        button#changeemailbtn.btn.btn-danger.btn-block(type="submit") Изменить адрес электронной почты
 
 append footer
   script(type="text/javascript").
@@ -68,7 +68,7 @@ append footer
           $("#newpassword").parent().addClass("has-error");
           $("<p/>").addClass("text-danger")
             .attr("id", "passwordmismatch")
-            .text("Passwords do not match")
+            .text("Пароли не совпадают")
             .insertAfter($("#newpassword_confirm"));
           return false;
         } else {
