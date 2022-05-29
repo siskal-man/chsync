@@ -32,7 +32,6 @@ class MetadataCacheDB {
     constructor(db) {
         this.db = db;
     }
-
     async put(media) {
         media = new Media(media);
         media.type = mediaquery2cytube(media.type);

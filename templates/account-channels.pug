@@ -4,23 +4,27 @@ block content
   if !loggedIn
     .col-lg-6.col-lg-offset-3.col-md-6.col-md-offset-3
       .alert.alert-danger.messagebox.center
-        strong Authorization Required
-        p You must be <a href="/login">logged in</a> to view this page.
+        strong Требуется авторизация
+        p Вы должны <a href="/login">войти в систему,</a> чтобы иметь доступ к этой странице.
+  if !superadmin
+    .col-lg-6.col-lg-offset-3.col-md-6.col-md-offset-3
+        .alert.alert-danger.messagebox.center
+          strong Доступ к этой странице имеет только администратор
   else
     .col-lg-6.col-md-6
-      h3 My Channels
+      h3 Мои каналы
       if deleteChannelError
         .alert.alert-danger.center.messagebox
-          strong Channel Deletion Failed
+          strong Ошибки при удалении канала
           p= deleteChannelError
       if channels.length == 0
         .center
-          strong You haven't registered any channels
+          strong У вас нет ни одного канала
       else
         table.table.table-bordered
           thead
             tr
-              th Channel
+              th Канал
           tbody
             for c in channels
               tr
@@ -29,38 +33,38 @@ block content
                     input(type="hidden", name="_csrf", value=csrfToken)
                     input(type="hidden", name="action", value="delete_channel")
                     input(type="hidden", name="name", value=c.name)
-                    button.btn.btn-xs.btn-danger(type="submit") Delete
+                    button.btn.btn-xs.btn-danger(type="submit") Удалить
                       span.glyphicon.glyphicon-trash
                   a(href=`/${channelPath}/${c.name}`, style="margin-left: 5px")= c.name
     .col-lg-6.col-md-6
-      h3 Register a new channel
+      h3 Зарегистрировать новый канал
       if newChannelError
         .alert.alert-danger.messagebox.center
-          strong Channel Registration Failed
+          strong Ошибки при регистрации канала
           p= newChannelError
       form(action="/account/channels", method="post")
         input(type="hidden", name="_csrf", value=csrfToken)
         input(type="hidden", name="action", value="new_channel")
         .form-group
-          label.control-label(for="channelname") Channel URL
+          label.control-label(for="channelname") URL-адрес канала
           .input-group
             span.input-group-addon #{baseUrl}/#{channelPath}/
             input#channelname.form-control(type="text", name="name", maxlength="30", onkeyup="checkChannel()")
           p#validate_channel.text-danger.pull-right
-        button#register.btn.btn-primary.btn-block(type="submit") Register
+        button#register.btn.btn-primary.btn-block(type="submit") Зарегистрировать
 
 append footer
   script(type='text/javascript').
     function checkChannel(){
         function nameIsInvalid(id){
             if(/\s/.test(id)){
-                return 'Channel URL may not contain spaces';
+                return 'URL-адрес канала не должен содержать пробелов';
             }
             if(id === ''){
-                return 'Channel URL must not be empty';
+                return 'URL-адрес канала не может быть пустым';
             }
             if(!/^[\w-]{1,30}$/.test(id)){
-                return 'Channel URL may only consist of a-z, A-Z, 0-9, - and _';
+                return 'URL-адрес канала может состоять только из a-z, A-Z, 0-9, - и _';
             }
             return false;
         }

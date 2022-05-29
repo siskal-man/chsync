@@ -4,32 +4,32 @@ mixin navheader()
       span.icon-bar
       span.icon-bar
       span.icon-bar
-    a.navbar-brand(href="/")= siteTitle
 
 mixin navdefaultlinks()
   li
-    a(href="/") Home
+    a(href="/") Главная
   li.dropdown
-    a.dropdown-toggle(href="#", data-toggle="dropdown") Account
+    a.dropdown-toggle(href="#", data-toggle="dropdown") Аккаунт
       b.caret
     ul.dropdown-menu
       if loggedIn
-        li: a(href="javascript:$('#logoutform').submit();") Log out
+        li: a(href="javascript:$('#logoutform').submit();") Выйти
         li.divider
-        li: a(href="/account/channels") Channels
-        li: a(href="/account/profile") Profile
-        li: a(href="/account/edit") Change Password/Email
-        li: a(href="/account/delete") Delete Account
+        if superadmin
+          li: a(href="/account/channels") Каналы
+        li: a(href="/account/profile") Профиль
+        li: a(href="/account/edit") Поменять пароль/email
+        li: a(href="/account/delete") Удалить аккаунт
       else
-        li: a(href="/login") Login
-        li: a(href="/register") Register
+        li: a(href="/login") Войти
+        li: a(href="/register") Регистрация
 
 mixin navsuperadmin(newTab)
   if superadmin
     if newTab
-      li: a(href="/acp", target="_blank") ACP
+      li: a(href="/acp", target="_blank" title='Панель управления администратора') ПУА
     else
-      li: a(href="/acp") ACP
+      li: a(href="/acp" title='Панель управления администратора') ПУА
 
 mixin navloginlogout()
   if loggedIn
@@ -42,26 +42,26 @@ mixin navloginform()
     form#loginform.navbar-form.navbar-right(action="/login", method="post")
       input(type="hidden", name="_csrf", value=csrfToken)
       .form-group
-        input#username.form-control(type="text", name="name", placeholder="Username")
+        input#username.form-control(type="text", name="name", placeholder="Логин")
       .form-group
-        input#password.form-control(type="password", name="password", placeholder="Password")
+        input#password.form-control(type="password", name="password", placeholder="Пароль")
       .form-group
         .checkbox
           label
             input(type="checkbox", name="remember")
-            span.navbar-text-nofloat Remember me
-      button#login.btn.btn-default(type="submit") Login
+            span.navbar-text-nofloat Запомнить
+      button#login.btn.btn-default(type="submit") Войти
   .visible-md
     p#loginform.navbar-text.pull-right
-      a#login.navbar-link(href="/login") Log in
+      a#login.navbar-link(href="/login") Войти
       span &nbsp;&middot;&nbsp;
-      a#register.navbar-link(href="/register") Register
+      a#register.navbar-link(href="/register") Регистрация
 
 
 mixin navlogoutform()
   form#logoutform.navbar-text.pull-right(action="/logout", method="post")
     input(type="hidden", name="_csrf", value=csrfToken)
-    span#welcome Welcome, #{loginName}
+    span#welcome Добро пожаловать, #{loginName}
     span &nbsp;&middot;&nbsp;
-    input#logout.navbar-link(type="submit", value="Log out")
+    input#logout.navbar-link(type="submit", value="Выйти")
 

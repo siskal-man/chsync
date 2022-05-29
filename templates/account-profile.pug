@@ -4,11 +4,11 @@ block content
   if !loggedIn
     .col-lg-6.col-lg-offset-3.col-md-6.col-md-offset-3
       .alert.alert-danger.messagebox.center
-        strong Authorization Required
-        p You must be <a href="/login">logged in</a> to view this page.
+        strong Требуется авторизация
+        p Вы должны <a href="/login">войти в систему,</a> чтобы иметь доступ к этой странице.
   else
     .col-lg-6.col-lg-offset-3.col-md-6.col-md-offset-3
-      h3 Profile
+      h3 Профиль
       if profileError
         .alert.alert-danger.center.messagebox
           strong Profile Error
@@ -17,16 +17,16 @@ block content
         img.profile-image(src=profileImage)
         strong= loginName
         p= profileText
-      h3 Edit Profile
+      h3 Редактировать профиль
       form(action="/account/profile", method="post", role="form")
         input(type="hidden", name="_csrf", value=csrfToken)
         .form-group
-          label.control-label(for="profileimage") Image
+          label.control-label(for="profileimage") Изображение профиля
           input#profileimage.form-control(type="text", name="image", maxlength="255")
         .form-group
-          label.control-label(for="profiletext") Text
+          label.control-label(for="profiletext") Описание
           textarea#profiletext.form-control(cols="10", name="text", maxlength="255")= profileText
-        button.btn.btn-primary.btn-block(type="submit") Save
+        button.btn.btn-primary.btn-block(type="submit") Сохранить
 
 append footer
   script(type="text/javascript").
@@ -44,7 +44,7 @@ append footer
           $error = $("<p/>")
               .attr({ id: "profileimage-error" })
               .addClass("text-danger")
-              .html("Profile image must be a URL beginning with <code>https://</code>")
+              .html("Изображение профиля должно быть URL-адресом, начинающимся с <code>https://</code>")
               .insertAfter($profileImage);
         }
       } else {

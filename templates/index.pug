@@ -17,7 +17,8 @@ block content
   .col-lg-3.col-md-3
     h3 Enter Channel
     input#channelname.form-control(type="text", placeholder="Channel Name")
-    p.text-muted New channels can be registered from the <a href="/account/channels">My Channels</a> page.
+    if superadmin
+      p.text-muted New channels can be registered from the <a href="/account/channels">My Channels</a> page.
 
 append footer
   script(type="text/javascript").
