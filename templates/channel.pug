@@ -80,9 +80,9 @@ html(lang="en")
               #videocontrols.btn-group.pull-right
                 button#mediarefresh.btn.btn-sm.btn-default(title="Перезагрузить видеоплеер")
                   span.glyphicon.glyphicon-retweet
-                button#fullscreenbtn.btn.btn-sm.btn-default(title="Сделайть видеоплеер полноэкранным")
+                button#fullscreenbtn.btn.btn-sm.btn-default(title="Сделать видеоплеер полноэкранным")
                   span.glyphicon.glyphicon-fullscreen
-                button#getplaylist.btn.btn-sm.btn-default(title="Извлечень ссылоки из плейлиста")
+                button#getplaylist.btn.btn-sm.btn-default(title="Извлечь ссылки из плейлиста")
                   span.glyphicon.glyphicon-link
                 button#voteskip.btn.btn-sm.btn-default(title="Следующее видео")
                   span.glyphicon.glyphicon-step-forward
@@ -97,7 +97,7 @@ html(lang="en")
                 #searchcontrol.collapse.plcontrol-collapse.col-lg-12.col-md-12
                   .vertical-spacer
                   .input-group
-                    input#library_query.form-control(type="text", placeholder="Search query")
+                    input#library_query.form-control(type="text", placeholder="Поиск")
                     span.input-group-btn
                       button#library_search.btn.btn-default Библиотека
                     span.input-group-btn
@@ -105,12 +105,12 @@ html(lang="en")
                   .checkbox
                     label
                       input.add-temp(type="checkbox")
-                      | Добавить как временный
+                      | Добавить как временное
                   ul#library.videolist.col-lg-12.col-md-12
                 #addfromurl.collapse.plcontrol-collapse.col-lg-12.col-md-12
                   .vertical-spacer
                   .input-group
-                    input#mediaurl.form-control(type="text", placeholder="Media URL")
+                    input#mediaurl.form-control(type="text", placeholder="URL-адрес")
                     span.input-group-btn
                       button#queue_next.btn.btn-default Следующее
                     span.input-group-btn
@@ -118,7 +118,7 @@ html(lang="en")
                   .checkbox
                     label
                       input.add-temp(type="checkbox")
-                      | Добавить как временный
+                      | Добавить как временное
                   div#addfromurl-queue
                 #customembed.collapse.plcontrol-collapse.col-lg-12.col-md-12
                   .vertical-spacer
@@ -131,7 +131,7 @@ html(lang="en")
                   .checkbox
                     label
                       input.add-temp(type="checkbox")
-                      | Добавить как временный
+                      | Добавить как временное
                   | Вставьте приведенный ниже код и нажмите кнопку Далее или В конце.
                   | Допустимыми кодами для встраивания являются <code>&lt;iframe&gt;</code> и <code>&lt;object&gt;</code> теги.  <strong>ПОЛЬЗОВАТЕЛЬСКИЕ ВСТАВКИ НЕ МОГУТ БЫТЬ СИНХРОНИЗИРОВАНЫ.</strong>
                   textarea#customembed-content.input-block-level.form-control(rows="3")
@@ -144,7 +144,7 @@ html(lang="en")
                   .checkbox
                     label
                       input.add-temp(type="checkbox")
-                      | Добавить как временный
+                      | Добавить как временное
                   ul#userpl_list.videolist
                 #queuefail.col-lg-12.col-md-12
                   .vertical-spacer
@@ -189,7 +189,7 @@ html(lang="en")
             h4 Список эмоций
           .modal-body
             .pull-left
-              input.emotelist-search.form-control(type="text", placeholder="Search")
+              input.emotelist-search.form-control(type="text", placeholder="Поиск")
             .pull-right
               .checkbox
                 label

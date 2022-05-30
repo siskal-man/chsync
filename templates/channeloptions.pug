@@ -70,10 +70,10 @@ mixin miscoptions
     h4 Настройки канала
     form.form-horizontal(action="javascript:void(0)")
       +rcheckbox-auto("cs-enable_link_regex", "Преобразование URL-адресов в чате в ссылки")
-      +rcheckbox-auto("cs-chat_antiflood", "Throttle chat(узнать перевод)")
-      +textbox-auto("cs-chat_antiflood_burst", "# of messages allowed before throttling(узнать перевод)")
+      +rcheckbox-auto("cs-chat_antiflood", "Включить регулировку отправки сообщений за один раз")
+      +textbox-auto("cs-chat_antiflood_burst", "# количество сообщений, разрешенных до регулирования ")
       +textbox-auto("cs-chat_antiflood_sustained", "# количество сообщений (после пакета), разрешенных в секунду")
-      +textbox-timeinput-auto("cs-new_user_chat_delay", "Задержка до того, как новые учетные записи смогут общаться в чате", "0")
+      +textbox-timeinput-auto("cs-new_user_chat_delay", "Задержка до того, как новые аккаунты смогут общаться в чате", "0")
       .form-group
         .col-sm-8.col-sm-offset-4
           span.text-info Ограничения для новых учетных записей можно отключить, установив задержку в 0.
@@ -95,7 +95,7 @@ mixin adminoptions
       +rcheckbox-auto("cs-torbanned", "Блокировать соединения из Tor")
       +rcheckbox-auto("cs-block_anonymous_users", "Блокировать анонимных пользователей")
       +rcheckbox-auto("cs-allow_ascii_control", "Разрешить управляющие символы ASCII (например, новые строки)")
-      +textbox-auto("cs-playlist_max_per_user", "Maximum # of videos per user(надо узнать что это)")
+      +textbox-auto("cs-playlist_max_per_user", "Максимальное количество видео которое может добавить пользователь")
       .form-group
         .col-sm-8.col-sm-offset-4
           span.text-info Установите значение 0 чтобы убрать ограничение
@@ -152,9 +152,9 @@ mixin chanranks
       .input-group
         input#cs-chanranks-name.form-control(type="text", placeholder="Логин")
         span.input-group-btn
-          button#cs-chanranks-mod.btn.btn-success +Mod
-          button#cs-chanranks-adm.btn.btn-info +Admin
-          button#cs-chanranks-owner.btn.btn-info +Owner
+          button#cs-chanranks-mod.btn.btn-success +Модератор
+          button#cs-chanranks-adm.btn.btn-info +Админ
+          button#cs-chanranks-owner.btn.btn-info +Владелец
     table.table.table-striped
       thead
         tr

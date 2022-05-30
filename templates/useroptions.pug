@@ -59,8 +59,8 @@ mixin us-scripts
         tr
           th Канал
           th Тип
-          th Preference
-          th Clear
+          th Разрешить/запретить
+          th Очистить
 
 mixin us-playback
   #us-playback.tab-pane
@@ -135,8 +135,8 @@ mixin us-chat
 
 mixin us-mod
   #us-mod.tab-pane
-    h4 Moderator Preferences
+    h4 Настройки администратора
     form.form-horizontal(action="javascript:void(0)")
-      +rcheckbox("us-modflair", "Show name color")
-      +rcheckbox("us-shadowchat", "Show shadowmuted messages")
-      +rcheckbox("us-show-ip-in-tooltip", "Show IP addresses in profile tooltip")
+      +rcheckbox("us-modflair", "Показать цвет имени")
+      +rcheckbox("us-shadowchat", "Показывать сообщения беззвучных участников")
+      +rcheckbox("us-show-ip-in-tooltip", "Показывать IP-адреса во всплывающей подсказке профиля")

@@ -19,28 +19,28 @@ Callbacks = {
         }
 
         $("<div/>").addClass("server-msg-reconnect")
-            .text("Connected")
+            .text("Подключен")
             .appendTo($("#messagebuffer"));
         scrollChat();
         stopQueueSpinner(null);
     },
 
     disconnect: function() {
-        if(KICKED)
+        if (KICKED)
             return;
         $("<div/>")
             .addClass("server-msg-disconnect")
-            .text("Disconnected from server.")
+            .text("Отключен от сервера.")
             .appendTo($("#messagebuffer"));
         scrollChat();
     },
 
-    reconnect: function () {
+    reconnect: function() {
         socket.emit("reportReconnect");
     },
 
     // Socket.IO error callback
-    error: function (msg) {
+    error: function(msg) {
         window.SOCKET_ERROR_REASON = msg;
         $("<div/>")
             .addClass("server-msg-disconnect")
@@ -56,7 +56,7 @@ Callbacks = {
         }
     },
 
-    costanza: function (data) {
+    costanza: function(data) {
         $("#costanza-modal").modal("hide");
         var modal = makeModal();
         modal.attr("id", "costanza-modal")
@@ -73,8 +73,8 @@ Callbacks = {
 
     announcement: function(data) {
         // Suppress this announcement for people who have already closed it
-        if (data.id && CyTube.ui.suppressedAnnouncementId
-                && data.id === CyTube.ui.suppressedAnnouncementId) {
+        if (data.id && CyTube.ui.suppressedAnnouncementId &&
+            data.id === CyTube.ui.suppressedAnnouncementId) {
             return;
         }
         $("#announcements").html("");
@@ -110,18 +110,18 @@ Callbacks = {
         switch (data.reason) {
             case "NEW_USER_CHAT":
                 message = "Your account is too new to chat in this channel.  " +
-                        "Please wait a while and try again.";
+                    "Please wait a while and try again.";
                 break;
             case "NEW_USER_CHAT_LINK":
                 message = "Your account is too new to post links in this channel.  " +
-                        "Please wait a while and try again.";
+                    "Please wait a while and try again.";
                 break;
         }
 
         errDialog(message);
     },
 
-    needPassword: function (wrongpw) {
+    needPassword: function(wrongpw) {
         var div = $("<div/>");
         $("<strong/>").text("Channel Password")
             .appendTo(div);
@@ -141,12 +141,12 @@ Callbacks = {
             .appendTo(div);
         var parent = chatDialog(div, '9999');
         parent.attr("id", "needpw");
-        var sendpw = function () {
+        var sendpw = function() {
             socket.emit("channelPassword", pwbox.val());
             parent.remove();
         };
         submit.click(sendpw);
-        pwbox.keydown(function (ev) {
+        pwbox.keydown(function(ev) {
             if (ev.keyCode == 13) {
                 sendpw();
             }
@@ -154,11 +154,11 @@ Callbacks = {
         pwbox.focus();
     },
 
-    cancelNeedPassword: function () {
+    cancelNeedPassword: function() {
         $("#needpw").remove();
     },
 
-    cooldown: function (time) {
+    cooldown: function(time) {
         time = time + 200;
         $("#chatline").css("color", "#ff0000");
         $(".pm-input").css("color", "#ff0000");
@@ -166,7 +166,7 @@ Callbacks = {
             clearTimeout($("#chatline").data("throttle_timer"));
         }
         CHATTHROTTLE = true;
-        $("#chatline").data("throttle_timer", setTimeout(function () {
+        $("#chatline").data("throttle_timer", setTimeout(function() {
             CHATTHROTTLE = false;
             $("#chatline").css("color", "");
             $(".pm-input").css("color", "");
@@ -179,16 +179,16 @@ Callbacks = {
 
         $("<button/>").addClass("close pull-right")
             .appendTo(div)
-            .click(function () {
+            .click(function() {
                 div.parent().remove();
             })
             .html("&times;");
         $("<h4/>").appendTo(div).text("Unregistered channel");
         $("<p/>").appendTo(div)
             .html("This channel is not registered to a CyTube account.  You can still " +
-                  "use it, but some features will not be available.  To register a " +
-                  "channel to your account, visit your <a href='/account/channels'>" +
-                  "channels</a> page.");
+                "use it, but some features will not be available.  To register a " +
+                "channel to your account, visit your <a href='/account/channels'>" +
+                "channels</a> page.");
     },
 
     setMotd: function(motd) {
@@ -212,7 +212,7 @@ Callbacks = {
         formatCSChatFilterList();
     },
 
-    updateChatFilter: function (f) {
+    updateChatFilter: function(f) {
         var entries = $("#cs-chatfilters table").data("entries") || [];
         var found = false;
         for (var i = 0; i < entries.length; i++) {
@@ -231,7 +231,7 @@ Callbacks = {
         formatCSChatFilterList();
     },
 
-    deleteChatFilter: function (f) {
+    deleteChatFilter: function(f) {
         var entries = $("#cs-chatfilters table").data("entries") || [];
         var found = false;
         for (var i = 0; i < entries.length; i++) {
@@ -264,15 +264,15 @@ Callbacks = {
                     .attr("rel", "stylesheet")
                     .attr("href", opts.externalcss)
                     .attr("id", "chanexternalcss")
-                    .on("load", function () {
+                    .on("load", function() {
                         handleVideoResize();
                     })
                     .appendTo($("head"));
             }
         }
 
-        if(opts.externaljs.trim() != "" && !USEROPTS.ignore_channeljs &&
-           opts.externaljs !== CHANNEL.opts.externaljs) {
+        if (opts.externaljs.trim() != "" && !USEROPTS.ignore_channeljs &&
+            opts.externaljs !== CHANNEL.opts.externaljs) {
             var viewSource = document.createElement("a");
             viewSource.className = "btn btn-danger";
             viewSource.setAttribute("role", "button");
@@ -280,7 +280,7 @@ Callbacks = {
             viewSource.setAttribute("rel", "noopener noreferer");
             viewSource.textContent = "View external script source";
             viewSource.href = opts.externaljs;
-            checkScriptAccess(viewSource, "external", function (pref) {
+            checkScriptAccess(viewSource, "external", function(pref) {
                 if (pref === "ALLOW") {
                     $.getScript(opts.externaljs);
                 }
@@ -289,7 +289,7 @@ Callbacks = {
 
         CHANNEL.opts = opts;
 
-        if(opts.allow_voteskip)
+        if (opts.allow_voteskip)
             $("#voteskip").attr("disabled", false);
         else
             $("#voteskip").attr("disabled", true);
@@ -307,11 +307,11 @@ Callbacks = {
             $("#chancss").remove();
             CHANNEL.css = data.css;
             $("#cs-csstext").val(data.css);
-            if(data.css && !USEROPTS.ignore_channelcss) {
+            if (data.css && !USEROPTS.ignore_channelcss) {
                 $("<style/>").attr("type", "text/css")
                     .attr("id", "chancss")
                     .text(data.css)
-                    .on("load", function () {
+                    .on("load", function() {
                         handleVideoResize();
                     })
                     .appendTo($("head"));
@@ -327,11 +327,11 @@ Callbacks = {
             CHANNEL.js = data.js;
             $("#cs-jstext").val(data.js);
 
-            if(data.js && !USEROPTS.ignore_channeljs) {
+            if (data.js && !USEROPTS.ignore_channeljs) {
                 var viewSource = document.createElement("button");
                 viewSource.className = "btn btn-danger";
                 viewSource.textContent = "View inline script source";
-                viewSource.onclick = function () {
+                viewSource.onclick = function() {
                     var content = document.createElement("pre");
                     content.textContent = data.js;
                     modalAlert({
@@ -341,7 +341,7 @@ Callbacks = {
                     });
                 };
 
-                checkScriptAccess(viewSource, "embedded", function (pref) {
+                checkScriptAccess(viewSource, "embedded", function(pref) {
                     if (pref === "ALLOW") {
                         $("<script/>").attr("type", "text/javascript")
                             .attr("id", "chanjs")
@@ -363,7 +363,7 @@ Callbacks = {
         formatCSBanlist();
     },
 
-    banlistRemove: function (data) {
+    banlistRemove: function(data) {
         var entries = $("#cs-banlist table").data("entries") || [];
         var found = false;
         for (var i = 0; i < entries.length; i++) {
@@ -387,17 +387,20 @@ Callbacks = {
         formatCSModList();
     },
 
-    channelRankFail: function (data) {
+    channelRankFail: function(data) {
         if ($("#cs-chanranks").is(":visible")) {
             makeAlert("Error", data.msg, "alert-danger")
                 .removeClass().addClass("vertical-spacer")
                 .insertAfter($("#cs-chanranks form"));
         } else {
-            Callbacks.noflood({ action: "/rank", msg: data.msg });
+            Callbacks.noflood({
+                action: "/rank",
+                msg: data.msg
+            });
         }
     },
 
-    readChanLog: function (data) {
+    readChanLog: function(data) {
         var log = $("#cs-chanlog-text");
         if (log.length == 0)
             return;
@@ -412,8 +415,8 @@ Callbacks = {
 
     voteskip: function(data) {
         var icon = $("#voteskip").find(".glyphicon").remove();
-        if(data.count > 0) {
-            $("#voteskip").text(" ("+data.count+"/"+data.need+")");
+        if (data.count > 0) {
+            $("#voteskip").text(" (" + data.count + "/" + data.need + ")");
         } else {
             $("#voteskip").text("");
         }
@@ -424,11 +427,11 @@ Callbacks = {
     /* REGION Rank Stuff */
 
     rank: function(r) {
-        if(r >= 255)
+        if (r >= 255)
             SUPERADMIN = true;
         CLIENT.rank = r;
         handlePermissionChange();
-        if(SUPERADMIN && $("#setrank").length == 0) {
+        if (SUPERADMIN && $("#setrank").length == 0) {
             var li = $("<li/>").addClass("dropdown")
                 .attr("id", "setrank")
                 .appendTo($(".nav")[0]);
@@ -450,11 +453,11 @@ Callbacks = {
                     .appendTo(li);
             }
 
-            addRank(0, "<span class='userlist_guest'>Guest</span>");
-            addRank(1, "<span>Registered</span>");
-            addRank(2, "<span class='userlist_op'>Moderator</span>");
-            addRank(3, "<span class='userlist_owner'>Admin</span>");
-            addRank(255, "<span class='userlist_siteadmin'>Superadmin</span>");
+            addRank(0, "<span class='userlist_guest'>Гость</span>");
+            addRank(1, "<span>Пользователь</span>");
+            addRank(2, "<span class='userlist_op'>Модератор</span>");
+            addRank(3, "<span class='userlist_owner'>Админ</span>");
+            addRank(255, "<span class='userlist_siteadmin'>Суперадмин</span>");
         }
     },
 
@@ -477,8 +480,8 @@ Callbacks = {
     /* REGION Chat */
     usercount: function(count) {
         CHANNEL.usercount = count;
-        var text = count + " connected user";
-        if(count != 1) {
+        var text = count + " подключенных пользователей";
+        if (count != 1) {
             text += "s";
         }
         $("#usercount").text(text);
@@ -488,7 +491,7 @@ Callbacks = {
         addChatMessage(data);
     },
 
-    pm: function (data) {
+    pm: function(data) {
         var name = data.username;
         if (IGNORED.indexOf(name) !== -1) {
             return;
@@ -522,7 +525,7 @@ Callbacks = {
 
     userlist: function(data) {
         $(".userlist_item").remove();
-        for(var i = 0; i < data.length; i++) {
+        for (var i = 0; i < data.length; i++) {
             CyTube._internal_do_not_use_or_you_will_be_banned.addUserToList(data[i], false);
         }
         sortUserlist();
@@ -533,7 +536,7 @@ Callbacks = {
         sortUserlist();
     },
 
-    setUserMeta: function (data) {
+    setUserMeta: function(data) {
         var user = findUserlistItem(data.name);
         if (user == null) {
             return;
@@ -551,8 +554,11 @@ Callbacks = {
          * TODO: Remove this and the empty function below
          *         after script authors have had ample time to update
          */
-        socket.listeners('setAFK').forEach(function(listener){
-            listener({ name: data.name, afk: data.meta.afk });
+        socket.listeners('setAFK').forEach(function(listener) {
+            listener({
+                name: data.name,
+                afk: data.meta.afk
+            });
         });
 
         formatUserlistItem(user, data);
@@ -564,7 +570,7 @@ Callbacks = {
         return true;
     },
 
-    setUserProfile: function (data) {
+    setUserProfile: function(data) {
         var user = findUserlistItem(data.name);
         if (user === null)
             return;
@@ -572,8 +578,8 @@ Callbacks = {
         formatUserlistItem(user);
     },
 
-    setLeader: function (name) {
-        $(".userlist_item").each(function () {
+    setLeader: function(name) {
+        $(".userlist_item").each(function() {
             $(this).find(".glyphicon-star-empty").remove();
             if ($(this).data("leader")) {
                 $(this).data("leader", false);
@@ -582,7 +588,7 @@ Callbacks = {
         });
         if (name === "") {
             CLIENT.leader = false;
-            if(LEADTMR)
+            if (LEADTMR)
                 clearInterval(LEADTMR);
             LEADTMR = false;
             return;
@@ -596,20 +602,20 @@ Callbacks = {
         if (name === CLIENT.name) {
             CLIENT.leader = true;
             // I'm a leader!  Set up sync function
-            if(LEADTMR)
+            if (LEADTMR)
                 clearInterval(LEADTMR);
             LEADTMR = setInterval(sendVideoUpdate, 5000);
             handlePermissionChange();
         } else if (CLIENT.leader) {
             CLIENT.leader = false;
             handlePermissionChange();
-            if(LEADTMR)
+            if (LEADTMR)
                 clearInterval(LEADTMR);
             LEADTMR = false;
         }
     },
 
-    setUserRank: function (data) {
+    setUserRank: function(data) {
         data.name = data.name.toLowerCase();
         var entries = $("#cs-chanranks table").data("entries") || [];
         var found = false;
@@ -646,20 +652,19 @@ Callbacks = {
 
     userLeave: function(data) {
         var user = findUserlistItem(data.name);
-        if(user !== null)
+        if (user !== null)
             user.remove();
     },
 
     drinkCount: function(count) {
-        if(count != 0) {
+        if (count != 0) {
             var text = count + " drink";
-            if(count != 1) {
+            if (count != 1) {
                 text += "s";
             }
             $("#drinkcount").text(text);
             $("#drinkbar").show();
-        }
-        else {
+        } else {
             $("#drinkbar").hide();
         }
     },
@@ -671,11 +676,11 @@ Callbacks = {
         var q = $("#queue");
         q.html("");
 
-        for(var i = 0; i < data.length; i++) {
+        for (var i = 0; i < data.length; i++) {
             var li = makeQueueEntry(data[i], false);
-            li.attr("title", data[i].queueby
-                                ? ("Added by: " + data[i].queueby)
-                                : "Added by: Unknown");
+            li.attr("title", data[i].queueby ?
+                ("Добавил: " + data[i].queueby) :
+                "Добавил: Unknown");
             li.appendTo(q);
         }
 
@@ -684,31 +689,31 @@ Callbacks = {
 
     setPlaylistMeta: function(data) {
         var c = data.count + " item";
-        if(data.count != 1)
+        if (data.count != 1)
             c += "s";
         $("#plcount").text(c);
         $("#pllength").text(data.time);
     },
 
     queue: function(data) {
-        PL_ACTION_QUEUE.queue(function (plq) {
+        PL_ACTION_QUEUE.queue(function(plq) {
             stopQueueSpinner(data.item.media);
             var li = makeQueueEntry(data.item, true);
             if (data.item.uid === PL_CURRENT)
                 li.addClass("queue_active");
             li.hide();
             var q = $("#queue");
-            li.attr("title", data.item.queueby
-                                ? ("Added by: " + data.item.queueby)
-                                : "Added by: Unknown");
+            li.attr("title", data.item.queueby ?
+                ("Добавил: " + data.item.queueby) :
+                "Добавил: Unknown");
             if (data.after === "prepend") {
                 li.prependTo(q);
-                li.show("fade", function () {
+                li.show("fade", function() {
                     plq.release();
                 });
             } else if (data.after === "append") {
                 li.appendTo(q);
-                li.show("fade", function () {
+                li.show("fade", function() {
                     plq.release();
                 });
             } else {
@@ -718,18 +723,18 @@ Callbacks = {
                     return;
                 }
                 li.insertAfter(liafter);
-                li.show("fade", function () {
+                li.show("fade", function() {
                     plq.release();
                 });
             }
         });
     },
 
-    queueWarn: function (data) {
+    queueWarn: function(data) {
         queueMessage(data, "alert-warning");
     },
 
-    queueFail: function (data) {
+    queueFail: function(data) {
         if (data.id) {
             stopQueueSpinner(data);
         }
@@ -738,30 +743,29 @@ Callbacks = {
 
     setTemp: function(data) {
         var li = $(".pluid-" + data.uid);
-        if(li.length == 0)
+        if (li.length == 0)
             return false;
 
-        if(data.temp)
+        if (data.temp)
             li.addClass("queue_temp");
         else
             li.removeClass("queue_temp");
 
         li.data("temp", data.temp);
         var btn = li.find(".qbtn-tmp");
-        if(btn.length > 0) {
-            if(data.temp) {
-                btn.html(btn.html().replace("Make Temporary",
-                                            "Make Permanent"));
-            }
-            else {
-                btn.html(btn.html().replace("Make Permanent",
-                                            "Make Temporary"));
+        if (btn.length > 0) {
+            if (data.temp) {
+                btn.html(btn.html().replace("Сделать временным",
+                    "Сделать постоянным"));
+            } else {
+                btn.html(btn.html().replace("Сделать постоянным",
+                    "Сделать временным"));
             }
         }
     },
 
     "delete": function(data) {
-        PL_ACTION_QUEUE.queue(function (plq) {
+        PL_ACTION_QUEUE.queue(function(plq) {
             PL_WAIT_SCROLL = true;
             var li = $(".pluid-" + data.uid);
             li.hide("fade", function() {
@@ -773,8 +777,8 @@ Callbacks = {
     },
 
     moveVideo: function(data) {
-        PL_ACTION_QUEUE.queue(function (plq) {
-            playlistMove(data.from, data.after, function () {
+        PL_ACTION_QUEUE.queue(function(plq) {
+            playlistMove(data.from, data.after, function() {
                 plq.release();
             });
         });
@@ -786,7 +790,7 @@ Callbacks = {
         var li = $(".pluid-" + uid);
         if (li.length !== 0) {
             li.addClass("queue_active");
-            var tmr = setInterval(function () {
+            var tmr = setInterval(function() {
                 if (!PL_WAIT_SCROLL) {
                     scrollQueue();
                     clearInterval(tmr);
@@ -815,7 +819,7 @@ Callbacks = {
 
         // Persist the user's volume preference from the the player, if possible
         if (PLAYER && typeof PLAYER.getVolume === "function") {
-            PLAYER.getVolume(function (v) {
+            PLAYER.getVolume(function(v) {
                 if (typeof v === "number") {
                     if (v < 0 || v > 1) {
                         // Dailymotion's API was wrong once and caused a huge
@@ -857,21 +861,20 @@ Callbacks = {
         }
     },
 
-    setPlaylistLocked: function (locked) {
+    setPlaylistLocked: function(locked) {
         CHANNEL.openqueue = !locked;
         handlePermissionChange();
-        if(CHANNEL.openqueue) {
+        if (CHANNEL.openqueue) {
             $("#qlockbtn").removeClass("btn-danger")
                 .addClass("btn-success")
-                .attr("title", "Playlist Unlocked");
+                .attr("title", "Плейлист разблокирован");
             $("#qlockbtn").find("span")
                 .removeClass("glyphicon-lock")
                 .addClass("glyphicon-ok");
-        }
-        else {
+        } else {
             $("#qlockbtn").removeClass("btn-success")
                 .addClass("btn-danger")
-                .attr("title", "Playlist Locked");
+                .attr("title", "Плейлист заблокирован");
             $("#qlockbtn").find("span")
                 .removeClass("glyphicon-ok")
                 .addClass("glyphicon-lock");
@@ -894,13 +897,13 @@ Callbacks = {
 
         $("#search_pagination").remove();
         var opts = {
-            preLoadPage: function () {
+            preLoadPage: function() {
                 $("#library").html("");
             },
 
-            generator: function (item, page, index) {
+            generator: function(item, page, index) {
                 var li = makeSearchEntry(item, false);
-                if(hasPermission("playlistadd") || hasPermission("deletefromchannellib")) {
+                if (hasPermission("playlistadd") || hasPermission("deletefromchannellib")) {
                     addLibraryButtons(li, item, data.source);
                 }
                 $(li).appendTo($("#library"));
@@ -927,8 +930,10 @@ Callbacks = {
         var poll = $("<div/>").addClass("well active").prependTo($("#pollwrap"));
         $("<button/>").addClass("close pull-right").html("&times;")
             .appendTo(poll)
-            .click(function() { poll.remove(); });
-        if(hasPermission("pollctl")) {
+            .click(function() {
+                poll.remove();
+            });
+        if (hasPermission("pollctl")) {
             $("<button/>").addClass("btn btn-danger btn-sm pull-right").text("End Poll")
                 .appendTo(poll)
                 .click(function() {
@@ -937,28 +942,28 @@ Callbacks = {
         }
 
         $("<h3/>").html(data.title).appendTo(poll);
-        for(var i = 0; i < data.options.length; i++) {
+        for (var i = 0; i < data.options.length; i++) {
             (function(i) {
-            var callback = function () {
-                socket.emit("vote", {
-                    option: i
-                });
-                poll.find(".option button").each(function() {
-                    $(this).removeClass("active");
-                    $(this).parent().removeClass("option-selected");
-                });
-                $(this).addClass("active");
-                $(this).parent().addClass("option-selected");
-            }
-            $("<button/>").addClass("btn btn-default btn-sm").text(data.counts[i])
-                .prependTo($("<div/>").addClass("option").html(data.options[i])
+                var callback = function() {
+                    socket.emit("vote", {
+                        option: i
+                    });
+                    poll.find(".option button").each(function() {
+                        $(this).removeClass("active");
+                        $(this).parent().removeClass("option-selected");
+                    });
+                    $(this).addClass("active");
+                    $(this).parent().addClass("option-selected");
+                }
+                $("<button/>").addClass("btn btn-default btn-sm").text(data.counts[i])
+                    .prependTo($("<div/>").addClass("option").html(data.options[i])
                         .appendTo(poll))
-                .click(callback);
+                    .click(callback);
             })(i);
 
         }
-        $("<span/>").addClass("label label-default pull-right").data('timestamp',data.timestamp).appendTo(poll)
-            .attr('title', 'Poll opened by ' + data.initiator).data('initiator',data.initiator)
+        $("<span/>").addClass("label label-default pull-right").data('timestamp', data.timestamp).appendTo(poll)
+            .attr('title', 'Poll opened by ' + data.initiator).data('initiator', data.initiator)
             .text(new Date(data.timestamp).toTimeString().split(" ")[0]);
 
         poll.find(".btn").attr("disabled", !hasPermission("pollvote"));
@@ -974,7 +979,7 @@ Callbacks = {
     },
 
     closePoll: function() {
-        if($("#pollwrap .active").length != 0) {
+        if ($("#pollwrap .active").length != 0) {
             var poll = $("#pollwrap .active");
             poll.removeClass("active").addClass("muted");
             poll.find(".option button").each(function() {
@@ -991,13 +996,13 @@ Callbacks = {
         formatUserPlaylistList();
     },
 
-    emoteList: function (data) {
+    emoteList: function(data) {
         loadEmotes(data);
         EMOTELIST.handleChange();
         CSEMOTELIST.handleChange();
     },
 
-    updateEmote: function (data) {
+    updateEmote: function(data) {
         data.regex = new RegExp(data.source, "gi");
         var found = false;
         for (var i = 0; i < CHANNEL.emotes.length; i++) {
@@ -1029,7 +1034,7 @@ Callbacks = {
         CSEMOTELIST.handleChange();
     },
 
-    renameEmote: function (data) {
+    renameEmote: function(data) {
         var badBefore = /\s/g.test(data.old);
         var badAfter = /\s/g.test(data.name);
         var oldName = data.old;
@@ -1045,9 +1050,9 @@ Callbacks = {
         }
 
         // Now bad
-        if(badAfter){
+        if (badAfter) {
             // But wasn't bad before: Add it to bad list
-            if(!badBefore){
+            if (!badBefore) {
                 CHANNEL.badEmotes.push(data);
                 delete CHANNEL.emoteMap[oldName];
             }
@@ -1064,7 +1069,7 @@ Callbacks = {
         // Not bad now
         else {
             // But was bad before: Drop from list
-            if(badBefore){
+            if (badBefore) {
                 for (var i = 0; i < CHANNEL.badEmotes.length; i++) {
                     if (CHANNEL.badEmotes[i].name === oldName) {
                         CHANNEL.badEmotes.splice(i, 1);
@@ -1081,7 +1086,7 @@ Callbacks = {
         CSEMOTELIST.handleChange();
     },
 
-    removeEmote: function (data) {
+    removeEmote: function(data) {
         var found = -1;
         for (var i = 0; i < CHANNEL.emotes.length; i++) {
             if (CHANNEL.emotes[i].name === data.name) {
@@ -1104,7 +1109,7 @@ Callbacks = {
         }
     },
 
-    warnLargeChandump: function (data) {
+    warnLargeChandump: function(data) {
         function toHumanReadable(size) {
             if (size > 1048576) {
                 return Math.floor((size / 1048576) * 100) / 100 + "MiB";
@@ -1119,22 +1124,22 @@ Callbacks = {
             $("#chandumptoobig").remove();
         }
 
-        errDialog("This channel currently exceeds the maximum size of " +
-            toHumanReadable(data.limit) + " (channel size is " +
-            toHumanReadable(data.actual) + ").  Please reduce the size by removing " +
-            "unneeded playlist items, filters, and/or emotes.  Changes to the channel " +
-            "will not be saved until the size is reduced to under the limit.")
+        errDialog("Этот канал в настоящее время превышает максимальный размер " +
+                toHumanReadable(data.limit) + " (размер канала составляет " +
+                toHumanReadable(data.actual) + ").  Пожалуйста, уменьшите размер, удалив " +
+                "ненужные элементы списка воспроизведения, фильтры и / или эмоции. Изменения в канале " +
+                "не будут сохранены до тех пор, пока размер не будет уменьшен до предельного значения.")
             .attr("id", "chandumptoobig");
     },
 
-    partitionChange: function (socketConfig) {
+    partitionChange: function(socketConfig) {
         window.socket.disconnect();
         HAS_CONNECTED_BEFORE = false;
         ioServerConnect(socketConfig);
         setupCallbacks();
     },
 
-    validationError: function (error) {
+    validationError: function(error) {
         var target = $(error.target);
         target.parent().find(".text-danger").remove();
 
@@ -1148,11 +1153,11 @@ Callbacks = {
         }
 
         $("<p/>").addClass("text-danger")
-                .text(error.message)
-                .insertAfter(target);
+            .text(error.message)
+            .insertAfter(target);
     },
 
-    validationPassed: function (data) {
+    validationPassed: function(data) {
         var target = $(data.target);
         target.parent().find(".text-danger").remove();
 
@@ -1166,7 +1171,7 @@ Callbacks = {
         }
     },
 
-    clearVoteskipVote: function () {
+    clearVoteskipVote: function() {
         if (CHANNEL.opts.allow_voteskip && hasPermission("voteskip")) {
             $("#voteskip").attr("disabled", false);
         }
@@ -1175,7 +1180,7 @@ Callbacks = {
 
 var SOCKET_DEBUG = localStorage.getItem('cytube_socket_debug') === 'true';
 setupCallbacks = function() {
-    for(var key in Callbacks) {
+    for (var key in Callbacks) {
         (function(key) {
             socket.on(key, function(data) {
                 if (SOCKET_DEBUG) {
@@ -1192,7 +1197,7 @@ setupCallbacks = function() {
         })(key);
     }
 
-    socket.on("connect_error", function (error) {
+    socket.on("connect_error", function(error) {
         // If the socket has connected at least once during this
         // session and now gets a connect error, it is likely because
         // the server is down temporarily and not because of any configuration
@@ -1203,9 +1208,9 @@ setupCallbacks = function() {
 
         SOCKETIO_CONNECT_ERROR_COUNT++;
         if (SOCKETIO_CONNECT_ERROR_COUNT >= 3 &&
-                $("#socketio-connect-error").length === 0) {
+            $("#socketio-connect-error").length === 0) {
             var message = "Failed to connect to the server.  Try clearing your " +
-                          "cache and refreshing the page.";
+                "cache and refreshing the page.";
             makeAlert("Error", message, "alert-danger")
                 .attr("id", "socketio-connect-error")
                 .appendTo($("#announcements"));
@@ -1223,7 +1228,7 @@ function ioServerConnect(socketConfig) {
 
     var servers;
     if (socketConfig.alt && socketConfig.alt.length > 0 &&
-            localStorage.useAltServer === "true") {
+        localStorage.useAltServer === "true") {
         servers = socketConfig.alt;
         console.log("Using alt servers: " + JSON.stringify(servers));
     } else {
@@ -1231,7 +1236,7 @@ function ioServerConnect(socketConfig) {
     }
 
     var chosenServer = null;
-    servers.forEach(function (server) {
+    servers.forEach(function(server) {
         if (chosenServer === null) {
             chosenServer = server;
         } else if (server.secure && !chosenServer.secure) {
@@ -1263,8 +1268,8 @@ var USING_LETS_ENCRYPT = false;
 function initSocketIO(socketConfig) {
     function genericConnectionError() {
         var message = "The socket.io library could not be loaded from <code>" +
-                      source + "</code>.  Ensure that it is not being blocked " +
-                      "by a script blocking extension or firewall and try again.";
+            source + "</code>.  Ensure that it is not being blocked " +
+            "by a script blocking extension or firewall and try again.";
         makeAlert("Error", message, "alert-danger")
             .appendTo($("#announcements"));
         Callbacks.disconnect();
@@ -1277,8 +1282,8 @@ function initSocketIO(socketConfig) {
             source = script.src;
         }
 
-        if (/^https/.test(source) && location.protocol === "http:"
-                && USING_LETS_ENCRYPT) {
+        if (/^https/.test(source) && location.protocol === "http:" &&
+            USING_LETS_ENCRYPT) {
             checkLetsEncrypt(socketConfig, genericConnectionError);
             return;
         }
@@ -1292,7 +1297,7 @@ function initSocketIO(socketConfig) {
 }
 
 function checkLetsEncrypt(socketConfig, nonLetsEncryptError) {
-    var servers = socketConfig.servers.filter(function (server) {
+    var servers = socketConfig.servers.filter(function(server) {
         return !server.secure && !server.ipv6Only
     });
 
@@ -1305,13 +1310,13 @@ function checkLetsEncrypt(socketConfig, nonLetsEncryptError) {
         url: servers[0].url + "/socket.io/socket.io.js",
         dataType: "script",
         timeout: 10000
-    }).done(function () {
+    }).done(function() {
         var message = "Your browser cannot connect securely because it does " +
-                      "not support the newer Let's Encrypt certificate " +
-                      "authority.  Click below to acknowledge and continue " +
-                      "connecting over an unencrypted connection.  See " +
-                      "<a href=\"https://community.letsencrypt.org/t/which-browsers-and-operating-systems-support-lets-encrypt/4394\" target=\"_blank\">here</a> " +
-                      "for more details.";
+            "not support the newer Let's Encrypt certificate " +
+            "authority.  Click below to acknowledge and continue " +
+            "connecting over an unencrypted connection.  See " +
+            "<a href=\"https://community.letsencrypt.org/t/which-browsers-and-operating-systems-support-lets-encrypt/4394\" target=\"_blank\">here</a> " +
+            "for more details.";
         var connectionAlert = makeAlert("Error", message, "alert-danger")
             .appendTo($("#announcements"));
 
@@ -1329,18 +1334,18 @@ function checkLetsEncrypt(socketConfig, nonLetsEncryptError) {
             });
             setupCallbacks();
         };
-    }).error(function () {
+    }).error(function() {
         nonLetsEncryptError();
     });
 }
 
-(function () {
+(function() {
     $.getJSON("/socketconfig/" + CHANNEL.name + ".json")
-        .done(function (socketConfig) {
+        .done(function(socketConfig) {
             initSocketIO(socketConfig);
-        }).fail(function () {
+        }).fail(function() {
             makeAlert("Error", "Failed to retrieve socket.io configuration.  " +
-                               "Please try again in a few minutes.",
+                    "Please try again in a few minutes.",
                     "alert-danger")
                 .appendTo($("#announcements"));
             Callbacks.disconnect();
