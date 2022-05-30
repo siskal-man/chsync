@@ -1,12 +1,12 @@
 /* window focus/blur */
-CyTube.ui.onPageFocus = function () {
+CyTube.ui.onPageFocus = function() {
     FOCUSED = true;
     clearInterval(TITLE_BLINK);
     TITLE_BLINK = false;
     document.title = PAGETITLE;
 };
 
-CyTube.ui.onPageBlur = function (event) {
+CyTube.ui.onPageBlur = function(event) {
     FOCUSED = false;
 };
 
@@ -14,7 +14,7 @@ $(window).focus(CyTube.ui.onPageFocus).blur(CyTube.ui.onPageBlur);
 // See #783
 $(".modal").focus(CyTube.ui.onPageFocus);
 
-$("#togglemotd").click(function () {
+$("#togglemotd").click(function() {
     var hidden = $("#motd")[0].style.display === "none";
     $("#motd").toggle();
     if (hidden) {
@@ -30,7 +30,7 @@ $("#togglemotd").click(function () {
 
 /* chatbox */
 
-$("#modflair").click(function () {
+$("#modflair").click(function() {
     var m = $("#modflair");
     if (m.hasClass("label-success")) {
         USEROPTS.modhat = false;
@@ -54,7 +54,7 @@ $("#modflair").click(function () {
     setOpt('modhat', USEROPTS.modhat);
 });
 
-$("#usercount").mouseenter(function (ev) {
+$("#usercount").mouseenter(function(ev) {
     var breakdown = calcUserBreakdown();
     // re-using profile-box class for convenience
     var popup = $("<div/>")
@@ -64,7 +64,7 @@ $("#usercount").mouseenter(function (ev) {
         .appendTo($("#usercount"));
 
     var contents = "";
-    for(var key in breakdown) {
+    for (var key in breakdown) {
         contents += "<strong>" + key + ":&nbsp;</strong>" + breakdown[key];
         contents += "<br>"
     }
@@ -72,20 +72,20 @@ $("#usercount").mouseenter(function (ev) {
     popup.html(contents);
 });
 
-$("#usercount").mousemove(function (ev) {
+$("#usercount").mousemove(function(ev) {
     var popup = $("#usercount").find(".profile-box");
-    if(popup.length == 0)
+    if (popup.length == 0)
         return;
 
     popup.css("top", (ev.clientY + 5) + "px");
     popup.css("left", (ev.clientX) + "px");
 });
 
-$("#usercount").mouseleave(function () {
+$("#usercount").mouseleave(function() {
     $("#usercount").find(".profile-box").remove();
 });
 
-$("#messagebuffer").scroll(function (ev) {
+$("#messagebuffer").scroll(function(ev) {
     if (IGNORE_SCROLL_EVENT) {
         // Skip event, this was triggered by scrollChat() and not by a user action.
         // Reset for next event.
@@ -109,7 +109,7 @@ $("#messagebuffer").scroll(function (ev) {
     }
 });
 
-$("#guestname").keydown(function (ev) {
+$("#guestname").keydown(function(ev) {
     if (ev.keyCode === 13) {
         socket.emit("login", {
             name: $("#guestname").val()
@@ -144,7 +144,7 @@ function chatTabComplete(chatline) {
         options.push(username);
     }
 
-    CHANNEL.emotes.forEach(function (emote) {
+    CHANNEL.emotes.forEach(function(emote) {
         options.push(emote.name);
     });
 
@@ -155,10 +155,10 @@ function chatTabComplete(chatline) {
     }
 
     var result = CyTube.tabCompleteMethods[method](
-            currentText,
-            currentPosition,
-            options,
-            CyTube.chatTabCompleteData.context
+        currentText,
+        currentPosition,
+        options,
+        CyTube.chatTabCompleteData.context
     );
 
     chatline.value = result.text;
@@ -167,12 +167,12 @@ function chatTabComplete(chatline) {
 
 $("#chatline").keydown(function(ev) {
     // Enter/return
-    if(ev.keyCode == 13) {
+    if (ev.keyCode == 13) {
         if (CHATTHROTTLE) {
             return;
         }
         var msg = $("#chatline").val();
-        if(msg.trim()) {
+        if (msg.trim()) {
             var meta = {};
             if (USEROPTS.adminhat && CLIENT.rank >= 255) {
                 msg = "/a " + msg;
@@ -195,8 +195,7 @@ $("#chatline").keydown(function(ev) {
             $("#chatline").val("");
         }
         return;
-    }
-    else if(ev.keyCode == 9) { // Tab completion
+    } else if (ev.keyCode == 9) { // Tab completion
         try {
             chatTabComplete(ev.target);
         } catch (error) {
@@ -204,21 +203,19 @@ $("#chatline").keydown(function(ev) {
         }
         ev.preventDefault();
         return false;
-    }
-    else if(ev.keyCode == 38) { // Up arrow (input history)
-        if(CHATHISTIDX == CHATHIST.length) {
+    } else if (ev.keyCode == 38) { // Up arrow (input history)
+        if (CHATHISTIDX == CHATHIST.length) {
             CHATHIST.push($("#chatline").val());
         }
-        if(CHATHISTIDX > 0) {
+        if (CHATHISTIDX > 0) {
             CHATHISTIDX--;
             $("#chatline").val(CHATHIST[CHATHISTIDX]);
         }
 
         ev.preventDefault();
         return false;
-    }
-    else if(ev.keyCode == 40) { // Down arrow (input history)
-        if(CHATHISTIDX < CHATHIST.length - 1) {
+    } else if (ev.keyCode == 40) { // Down arrow (input history)
+        if (CHATHISTIDX < CHATHIST.length - 1) {
             CHATHISTIDX++;
             $("#chatline").val(CHATHIST[CHATHISTIDX]);
         }
@@ -249,7 +246,7 @@ $("#library_search").click(function() {
 });
 
 $("#library_query").keydown(function(ev) {
-    if(ev.keyCode == 13) {
+    if (ev.keyCode == 13) {
         if (!hasPermission("seeplaylist")) {
             $("#searchcontrol .alert").remove();
             var al = makeAlert("Permission Denied",
@@ -266,14 +263,14 @@ $("#library_query").keydown(function(ev) {
     }
 });
 
-$("#youtube_search").click(function () {
+$("#youtube_search").click(function() {
     var query = $("#library_query").val().toLowerCase();
     try {
         parseMediaLink(query);
         makeAlert("Media Link", "If you already have the link, paste it " +
-                  "in the 'Media URL' box under Playlist Controls.  This "+
-                  "searchbar works like YouTube's search function.",
-                  "alert-danger")
+                "in the 'Media URL' box under Playlist Controls.  This " +
+                "searchbar works like YouTube's search function.",
+                "alert-danger")
             .insertBefore($("#library"));
     } catch (e) {}
 
@@ -286,8 +283,8 @@ $("#youtube_search").click(function () {
 /* user playlists */
 
 $("#userpl_save").click(function() {
-    if($("#userpl_name").val().trim() == "") {
-        makeAlert("Invalid Name", "Playlist name cannot be empty", "alert-danger")
+    if ($("#userpl_name").val().trim() == "") {
+        makeAlert("Invalid Name", "Название плейлиста не может быть пустым", "alert-danger")
             .insertAfter($("#userpl_save").parent());
         return;
     }
@@ -314,7 +311,7 @@ $("#queue").sortable({
     },
     update: function(ev, ui) {
         var prev = ui.item.prevAll();
-        if(prev.length == 0)
+        if (prev.length == 0)
             PL_AFTER = "prepend";
         else
             PL_AFTER = $(prev[0]).data("uid");
@@ -348,7 +345,7 @@ function queue(pos, src) {
         });
     } else {
         var linkList = $("#mediaurl").val();
-        var links = linkList.split(",http").map(function (link, i) {
+        var links = linkList.split(",http").map(function(link, i) {
             if (i > 0) {
                 return "http" + link;
             } else {
@@ -367,7 +364,7 @@ function queue(pos, src) {
             document.getElementById("addfromurl").appendChild(notification);
         }
 
-        links.forEach(function (link) {
+        links.forEach(function(link) {
             var data;
 
             try {
@@ -397,14 +394,14 @@ function queue(pos, src) {
                     Callbacks.queueFail({
                         link: data.id,
                         msg: "Kisscartoon and Kissanime are not supported.  See https://git.io/vxS9n" +
-                             " for more information about why these cannot be supported."
+                            " for more information about why these cannot be supported."
                     });
                     return;
                 } else if (data.id.match(/mega\.nz/)) {
                     Callbacks.queueFail({
                         link: data.id,
                         msg: "Mega.nz is not supported.  See https://git.io/fx6fz" +
-                             " for more information about why mega.nz cannot be supported."
+                            " for more information about why mega.nz cannot be supported."
                     });
                     return;
                 }
@@ -416,8 +413,8 @@ function queue(pos, src) {
 
             if (data.id == null || data.type == null) {
                 makeAlert("Error", "Failed to parse link " + link +
-                          ".  Please check that it is correct",
-                          "alert-danger", true)
+                        ".  Please check that it is correct",
+                        "alert-danger", true)
                     .insertAfter($("#addfromurl"));
             } else {
                 emitQueue.push({
@@ -433,6 +430,7 @@ function queue(pos, src) {
         });
 
         var nextQueueDelay = 1020;
+
         function next() {
             var data = emitQueue.shift();
             if (!data) {
@@ -473,8 +471,7 @@ $("#mediaurl").keyup(function(ev) {
             if (parseMediaLink($("#mediaurl").val()).type === "fi") {
                 editTitle = true;
             }
-        } catch (error) {
-        }
+        } catch (error) {}
 
         if (editTitle) {
             var title = $("#addfromurl-title");
@@ -487,7 +484,7 @@ $("#mediaurl").keyup(function(ev) {
                 $("<input/>").addClass("form-control")
                     .attr("type", "text")
                     .attr("id", "addfromurl-title-val")
-                    .keydown(function (ev) {
+                    .keydown(function(ev) {
                         if (ev.keyCode === 13) {
                             queue("end", "url");
                         }
@@ -526,7 +523,7 @@ $("#getplaylist").click(function() {
             socket.listeners("playlist").splice(idx);
         }
         var list = [];
-        for(var i = 0; i < data.length; i++) {
+        for (var i = 0; i < data.length; i++) {
             var entry = formatURL(data[i].media);
             list.push(entry);
         }
@@ -576,14 +573,14 @@ $("#getplaylist").click(function() {
 
 $("#clearplaylist").click(function() {
     var clear = confirm("Are you sure you want to clear the playlist?");
-    if(clear) {
+    if (clear) {
         socket.emit("clearPlaylist");
     }
 });
 
 $("#shuffleplaylist").click(function() {
     var shuffle = confirm("Are you sure you want to shuffle the playlist?");
-    if(shuffle) {
+    if (shuffle) {
         socket.emit("shufflePlaylist");
     }
 });
@@ -601,8 +598,8 @@ $("#cs-chanranks-adm").click(chanrankSubmit.bind(this, 3));
 $("#cs-chanranks-owner").click(chanrankSubmit.bind(this, 4));
 
 ["#showmediaurl", "#showsearch", "#showcustomembed", "#showplaylistmanager"]
-    .forEach(function (id) {
-    $(id).click(function () {
+.forEach(function(id) {
+    $(id).click(function() {
         var wasActive = $(id).hasClass("active");
         $(".plcontrol-collapse").collapse("hide");
         $("#plcontrol button.active").button("toggle");
@@ -616,7 +613,7 @@ $("#plcontrol button").button("hide");
 $(".plcontrol-collapse").collapse();
 $(".plcontrol-collapse").collapse("hide");
 
-$(".cs-checkbox").change(function () {
+$(".cs-checkbox").change(function() {
     var box = $(this);
     var key = box.attr("id").replace("cs-", "");
     var value = box.prop("checked");
@@ -625,14 +622,14 @@ $(".cs-checkbox").change(function () {
     socket.emit("setOptions", data);
 });
 
-$(".cs-textbox").keyup(function () {
+$(".cs-textbox").keyup(function() {
     var box = $(this);
     var key = box.attr("id").replace("cs-", "");
     var value = box.val();
     var lastkey = Date.now();
     box.data("lastkey", lastkey);
 
-    setTimeout(function () {
+    setTimeout(function() {
         if (box.data("lastkey") !== lastkey || box.val() !== value) {
             return;
         }
@@ -652,14 +649,14 @@ $(".cs-textbox").keyup(function () {
     }, 1000);
 });
 
-$(".cs-textbox-timeinput").keyup(function (event) {
+$(".cs-textbox-timeinput").keyup(function(event) {
     var box = $(this);
     var key = box.attr("id").replace("cs-", "");
     var value = box.val();
     var lastkey = Date.now();
     box.data("lastkey", lastkey);
 
-    setTimeout(function () {
+    setTimeout(function() {
         if (box.data("lastkey") !== lastkey || box.val() !== value) {
             return;
         }
@@ -671,9 +668,9 @@ $(".cs-textbox-timeinput").keyup(function (event) {
             data[key] = parseTimeout(value);
         } catch (error) {
             var msg = "Invalid timespan value '" + value + "'.  Please use the format " +
-                      "HH:MM:SS or enter a single number for the number of seconds.";
+                "HH:MM:SS or enter a single number for the number of seconds.";
             var validationError = $("<p/>").addClass("text-danger").text(msg)
-                    .attr("id", "cs-textbox-timeinput-validation-error-" + key);
+                .attr("id", "cs-textbox-timeinput-validation-error-" + key);
             validationError.insertAfter(event.target);
             $(event.target).parent().addClass("has-error");
             return;
@@ -682,31 +679,31 @@ $(".cs-textbox-timeinput").keyup(function (event) {
     }, 1000);
 });
 
-$("#cs-chanlog-refresh").click(function () {
+$("#cs-chanlog-refresh").click(function() {
     socket.emit("readChanLog");
 });
 
 $("#cs-chanlog-filter").change(filterChannelLog);
 
-$("#cs-motdsubmit").click(function () {
+$("#cs-motdsubmit").click(function() {
     socket.emit("setMotd", {
         motd: $("#cs-motdtext").val()
     });
 });
 
-$("#cs-csssubmit").click(function () {
+$("#cs-csssubmit").click(function() {
     socket.emit("setChannelCSS", {
         css: $("#cs-csstext").val()
     });
 });
 
-$("#cs-jssubmit").click(function () {
+$("#cs-jssubmit").click(function() {
     socket.emit("setChannelJS", {
         js: $("#cs-jstext").val()
     });
 });
 
-$("#cs-chatfilters-newsubmit").click(function () {
+$("#cs-chatfilters-newsubmit").click(function() {
     var name = $("#cs-chatfilters-newname").val();
     var regex = $("#cs-chatfilters-newregex").val();
     var flags = $("#cs-chatfilters-newflags").val();
@@ -714,9 +711,9 @@ $("#cs-chatfilters-newsubmit").click(function () {
     var entcheck = checkEntitiesInStr(regex);
     if (entcheck) {
         alert("Warning: " + entcheck.src + " will be replaced by " +
-              entcheck.replace + " in the message preprocessor.  This " +
-              "regular expression may not match what you intended it to " +
-              "match.");
+            entcheck.replace + " in the message preprocessor.  This " +
+            "regular expression may not match what you intended it to " +
+            "match.");
     }
 
     socket.emit("addFilter", {
@@ -727,7 +724,7 @@ $("#cs-chatfilters-newsubmit").click(function () {
         active: true
     });
 
-    socket.once("addFilterSuccess", function () {
+    socket.once("addFilterSuccess", function() {
         $("#cs-chatfilters-newname").val("");
         $("#cs-chatfilters-newregex").val("");
         $("#cs-chatfilters-newflags").val("");
@@ -735,7 +732,7 @@ $("#cs-chatfilters-newsubmit").click(function () {
     });
 });
 
-$("#cs-emotes-newsubmit").click(function () {
+$("#cs-emotes-newsubmit").click(function() {
     var name = $("#cs-emotes-newname").val();
     var image = $("#cs-emotes-newimage").val();
 
@@ -748,8 +745,8 @@ $("#cs-emotes-newsubmit").click(function () {
     $("#cs-emotes-newimage").val("");
 });
 
-$("#cs-chatfilters-export").click(function () {
-    var callback = function (data) {
+$("#cs-chatfilters-export").click(function() {
+    var callback = function(data) {
         socket.listeners("chatFilters").splice(
             socket.listeners("chatFilters").indexOf(callback)
         );
@@ -761,7 +758,7 @@ $("#cs-chatfilters-export").click(function () {
     socket.emit("requestChatFilters");
 });
 
-$("#cs-chatfilters-import").click(function () {
+$("#cs-chatfilters-import").click(function() {
     var text = $("#cs-chatfilters-exporttext").val();
     var choose = confirm("You are about to import filters from the contents of the textbox below the import button.  If this is empty, it will clear all of your filters.  Are you sure you want to continue?");
     if (!choose) {
@@ -783,8 +780,8 @@ $("#cs-chatfilters-import").click(function () {
     socket.emit("importFilters", data);
 });
 
-$("#cs-emotes-export").click(function () {
-    var em = CHANNEL.emotes.map(function (f) {
+$("#cs-emotes-export").click(function() {
+    var em = CHANNEL.emotes.map(function(f) {
         return {
             name: f.name,
             image: f.image
@@ -793,7 +790,7 @@ $("#cs-emotes-export").click(function () {
     $("#cs-emotes-exporttext").val(JSON.stringify(em));
 });
 
-$("#cs-emotes-import").click(function () {
+$("#cs-emotes-import").click(function() {
     var text = $("#cs-emotes-exporttext").val();
     var choose = confirm("You are about to import emotes from the contents of the textbox below the import button.  If this is empty, it will clear all of your emotes.  Are you sure you want to continue?");
     if (!choose) {
@@ -815,7 +812,7 @@ $("#cs-emotes-import").click(function () {
     socket.emit("importEmotes", data);
 });
 
-var toggleUserlist = function () {
+var toggleUserlist = function() {
     var direction = !USEROPTS.layout.match(/synchtube/) ? "glyphicon-chevron-right" : "glyphicon-chevron-left"
     if ($("#userlist")[0].style.display === "none") {
         $("#userlist").show();
@@ -830,7 +827,7 @@ var toggleUserlist = function () {
 $("#usercount").click(toggleUserlist);
 $("#userlisttoggle").click(toggleUserlist);
 
-$(".add-temp").change(function () {
+$(".add-temp").change(function() {
     $(".add-temp").prop("checked", $(this).prop("checked"));
 });
 
@@ -842,21 +839,21 @@ $(".add-temp").change(function () {
  * the modal must be updated so that the backdrop is resized
  * appropriately.
  */
-$("#channeloptions li > a[data-toggle='tab']").on("shown.bs.tab", function () {
+$("#channeloptions li > a[data-toggle='tab']").on("shown.bs.tab", function() {
     $("#channeloptions").data("bs.modal").handleUpdate();
 });
 
 applyOpts();
 
-(function () {
+(function() {
     var embed = document.querySelector("#videowrap .embed-responsive");
     if (!embed) {
         return;
     }
 
     if (typeof window.MutationObserver === "function") {
-        var mr = new MutationObserver(function (records) {
-            records.forEach(function (record) {
+        var mr = new MutationObserver(function(records) {
+            records.forEach(function(record) {
                 if (record.type !== "childList") return;
                 if (!record.addedNodes || record.addedNodes.length === 0) return;
 
@@ -865,30 +862,32 @@ applyOpts();
             });
         });
 
-        mr.observe(embed, { childList: true });
+        mr.observe(embed, {
+            childList: true
+        });
     } else {
         /*
          * DOMNodeInserted is deprecated.  This code is here only as a fallback
          * for browsers that do not support MutationObserver
          */
-        embed.addEventListener("DOMNodeInserted", function (ev) {
+        embed.addEventListener("DOMNodeInserted", function(ev) {
             if (ev.target.id === "ytapiplayer") handleVideoResize();
         });
     }
 })();
 
 var EMOTELISTMODAL = $("#emotelist");
-$("#emotelistbtn").click(function () {
+$("#emotelistbtn").click(function() {
     EMOTELISTMODAL.modal();
 });
 
-EMOTELISTMODAL.find(".emotelist-alphabetical").change(function () {
+EMOTELISTMODAL.find(".emotelist-alphabetical").change(function() {
     USEROPTS.emotelist_sort = this.checked;
     setOpt("emotelist_sort", USEROPTS.emotelist_sort);
 });
 EMOTELISTMODAL.find(".emotelist-alphabetical").prop("checked", USEROPTS.emotelist_sort);
 
-$("#fullscreenbtn").click(function () {
+$("#fullscreenbtn").click(function() {
     var elem = document.querySelector("#videowrap .embed-responsive");
     // this shit is why frontend web development sucks
     var fn = elem.requestFullscreen ||
@@ -911,7 +910,7 @@ function handleCSSJSTooLarge(selector) {
         warning = makeAlert("Maximum Size Exceeded", "Inline CSS and JavaScript are " +
                 "limited to 20,000 characters or less.  If you need more room, you " +
                 "need to use the external CSS or JavaScript option.", "alert-danger")
-                .attr("id", selector.replace(/#/, ""));
+            .attr("id", selector.replace(/#/, ""));
         warning.insertBefore(this);
     } else {
         $(selector).remove();
@@ -919,11 +918,11 @@ function handleCSSJSTooLarge(selector) {
 }
 
 $("#cs-csstext").bind("input", handleCSSJSTooLarge.bind($("#cs-csstext")[0],
-        "#cs-csstext-too-big"));
+    "#cs-csstext-too-big"));
 $("#cs-jstext").bind("input", handleCSSJSTooLarge.bind($("#cs-jstext")[0],
-        "#cs-jstext-too-big"));
+    "#cs-jstext-too-big"));
 
-$("#resize-video-larger").click(function () {
+$("#resize-video-larger").click(function() {
     try {
         CyTube.ui.changeVideoWidth(1);
     } catch (error) {
@@ -931,7 +930,7 @@ $("#resize-video-larger").click(function () {
     }
 });
 
-$("#resize-video-smaller").click(function () {
+$("#resize-video-smaller").click(function() {
     try {
         CyTube.ui.changeVideoWidth(-1);
     } catch (error) {

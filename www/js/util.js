@@ -381,12 +381,12 @@ function addUserDropdown(entry) {
 
 function calcUserBreakdown() {
     var breakdown = {
-        "Site Admins": 0,
-        "Channel Admins": 0,
-        "Moderators": 0,
-        "Regular Users": 0,
-        "Guests": 0,
-        "Anonymous": 0,
+        "Админы сайтов": 0,
+        "Админы каналов": 0,
+        "Модераторы": 0,
+        "Зарегистрированные пользователи": 0,
+        "Гости": 0,
+        "Анонимные": 0,
         "AFK": 0
     };
     var total = 0;
@@ -396,15 +396,15 @@ function calcUserBreakdown() {
         };
 
         if (data.rank >= 255)
-            breakdown["Site Admins"]++;
+            breakdown["Админы сайтов"]++;
         else if (data.rank >= 3)
-            breakdown["Channel Admins"]++;
+            breakdown["Админы каналов"]++;
         else if (data.rank == 2)
-            breakdown["Moderators"]++;
+            breakdown["Модераторы"]++;
         else if (data.rank >= 1)
-            breakdown["Regular Users"]++;
+            breakdown["Зарегистрированные пользователи"]++;
         else
-            breakdown["Guests"]++;
+            breakdown["Гости"]++;
 
         total++;
 
@@ -412,7 +412,7 @@ function calcUserBreakdown() {
             breakdown["AFK"]++;
     });
 
-    breakdown["Anonymous"] = CHANNEL.usercount - total;
+    breakdown["Анонимные"] = CHANNEL.usercount - total;
 
     return breakdown;
 }
@@ -1981,34 +1981,34 @@ function genPermissionsEditor() {
     }
 
     var standard = [
-        ["Anonymous", "-1"],
-        ["Guest", "0"],
-        ["Registered", "1"],
-        ["Leader", "1.5"],
-        ["Moderator", "2"],
-        ["Channel Admin", "3"],
+        ["Аноним", "-1"],
+        ["Гость", "0"],
+        ["Пользователь", "1"],
+        ["Лидер", "1.5"],
+        ["Модератор", "2"],
+        ["Админ канала", "3"],
         ["Nobody", "1000000"]
     ];
 
     var noanon = [
-        ["Guest", "0"],
-        ["Registered", "1"],
-        ["Leader", "1.5"],
-        ["Moderator", "2"],
-        ["Channel Admin", "3"],
+        ["Аноним", "0"],
+        ["Гость", "1"],
+        ["Лидер", "1.5"],
+        ["Модератор", "2"],
+        ["Админ канала", "3"],
         ["Nobody", "1000000"]
     ];
 
     var modleader = [
-        ["Leader", "1.5"],
-        ["Moderator", "2"],
-        ["Channel Admin", "3"],
+        ["Лидер", "1.5"],
+        ["Модератор", "2"],
+        ["Админ канала", "3"],
         ["Nobody", "1000000"]
     ];
 
     var modplus = [
-        ["Moderator", "2"],
-        ["Channel Admin", "3"],
+        ["Модератор", "2"],
+        ["Админ канала", "3"],
         ["Nobody", "1000000"]
     ];
 
@@ -2067,7 +2067,7 @@ function genPermissionsEditor() {
     var sgroup = $("<div/>").addClass("form-group").appendTo(form);
     var sgroupinner = $("<div/>").addClass("col-sm-8 col-sm-offset-4").appendTo(sgroup);
     var submit = $("<button/>").addClass("btn btn-primary").appendTo(sgroupinner);
-    submit.text("Save");
+    submit.text("Сохранить");
     submit.click(function() {
         var perms = {};
         form.find("select").each(function() {
@@ -2078,7 +2078,7 @@ function genPermissionsEditor() {
 
     var msggroup = $("<div/>").addClass("form-group").insertAfter(sgroup);
     var msginner = $("<div/>").addClass("col-sm-8 col-sm-offset-4").appendTo(msggroup);
-    var text = $("<span/>").addClass("text-info").text("Permissions updated")
+    var text = $("<span/>").addClass("text-info").text("Разрешения обновлены")
         .appendTo(msginner);
 
     setTimeout(function() {
@@ -2595,7 +2595,7 @@ function formatCSChatFilterList() {
                 .prop("checked", f.filterlinks);
 
             var save = $("<button/>").addClass("btn btn-xs btn-success")
-                .attr("title", "Save changes")
+                .attr("title", "Сохранить изменения")
                 .insertAfter(control);
             $("<span/>").addClass("glyphicon glyphicon-floppy-save").appendTo(save);
             save.click(function() {
