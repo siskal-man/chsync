@@ -24,10 +24,10 @@ mixin textbox(id, label, placeholder)
 
 mixin us-general
   #us-general.tab-pane
-    h4 General Preferences
+    h4 Общие настройки
     form.form-horizontal(action="javascript:void(0)")
       .form-group
-        label.control-label.col-sm-4(for="#us-theme") Theme
+        label.control-label.col-sm-4(for="#us-theme") Тема
         .col-sm-8
           select#us-theme.form-control
             option(value="/css/themes/light.css") Light
@@ -36,7 +36,7 @@ mixin us-general
             option(value="/css/themes/cyborg.css") Cyborg
             option(value="/css/themes/modern.css") Modern
       .form-group
-        label.control-label.col-sm-4(for="#us-layout") Layout
+        label.control-label.col-sm-4(for="#us-layout") Располежение чата и видеоплеера
         .col-sm-8
           select#us-layout.form-control
             option(value="default") Compact
@@ -46,9 +46,9 @@ mixin us-general
             option(value="hd") HD
       .col-sm-4
       .col-sm-8
-        p.text-danger Изменение макетов(темы) может потребовать перезагрузки для вступления в силу.
-      +rcheckbox("us-no-channelcss", "Ignore Channel CSS")
-      +rcheckbox("us-no-channeljs", "Ignore Channel Javascript")
+        p.text-danger Изменение макета(темы) может потребовать перезагрузки страницы для вступления в силу.
+      +rcheckbox("us-no-channelcss", "Игнорировать CSS стили канала")
+      +rcheckbox("us-no-channeljs", "Игнорировать Javascript скрипты канала")
       .clear
 
 mixin us-scripts
@@ -64,70 +64,70 @@ mixin us-scripts
 
 mixin us-playback
   #us-playback.tab-pane
-    h4 Playback Preferences
+    h4 Настройки воспроизведения
     form.form-horizontal(action="javascript:void(0)")
-      +rcheckbox("us-synch", "Synchronize video playback")
-      +textbox("us-synch-accuracy", "Synch threshold (seconds)", "2")
-      +rcheckbox("us-wmode-transparent", "Set wmode=transparent")
+      +rcheckbox("us-synch", "Синхронизация воспроизведения видео")
+      +textbox("us-synch-accuracy", "Сихнронизировать (в секундах)", "2")
+      +rcheckbox("us-wmode-transparent", "Установить wmode=transparent(прозрачный)")
       .form-group
         .col-sm-4
         .col-sm-8
-          p.text-info Setting <code>wmode=transparent</code> allows objects to be displayed above the video player, but may cause performance issues on some systems.
-      +rcheckbox("us-hidevideo", "Remove the video player")
-      +rcheckbox("us-playlistbuttons", "Hide playlist buttons by default")
-      +rcheckbox("us-oldbtns", "Old style playlist buttons")
+          p.text-info Установка <code>wmode=transparent</code> позволяет отображать объекты над видеоплеером, но может вызвать проблемы с производительностью в некоторых системах.
+      +rcheckbox("us-hidevideo", "Скрыть видеоплеер")
+      +rcheckbox("us-playlistbuttons", "Скрыть панель управления плейлистом  по умолчанию")
+      +rcheckbox("us-oldbtns", "Старое оформление панели управления плейлиста")
       .form-group
-        label.control-label.col-sm-4(for="#us-default-quality") Quality Preference
+        label.control-label.col-sm-4(for="#us-default-quality") Качество
         .col-sm-8
           select#us-default-quality.form-control
-            option(value="auto") Auto
+            option(value="auto") Авто
             option(value="240") 240p
             option(value="360") 360p
             option(value="480") 480p
             option(value="720") 720p
             option(value="1080") 1080p
-            option(value="best") Highest Available
+            option(value="best") Самое высокое из доступных
       .form-group
         .col-sm-4
         .col-sm-8
-          p.text-info Due to technical changes on YouTube's side, the CyTube quality preference can no longer be automatically applied on YouTube videos.  See <a href="https://github.com/calzoneman/sync/issues/726" rel="noopener noreferer" target="_blank">this GitHub issue</a> for details.
+          p.text-info Из-за технических изменений на стороне YouTube предпочтение качества CyTube больше не может автоматически применяться к видео на YouTube.  Подробности см. <a href="https://github.com/calzoneman/sync/issues/726" rel="noopener noreferer" target="_blank">на GitHub</a>.
 
 mixin us-chat
   #us-chat.tab-pane
-    h4 Chat Preferences
+    h4 Настройки чата
     form.form-horizontal(action="javascript:void(0)")
-      +rcheckbox("us-chat-timestamp", "Show timestamps in chat")
-      +rcheckbox("us-sort-rank", "Sort userlist by rank")
-      +rcheckbox("us-sort-afk", "Sort AFKers to bottom")
+      +rcheckbox("us-chat-timestamp", "Показать время отправки сообщения")
+      +rcheckbox("us-sort-rank", "Сортировать список участинков по рангу")
+      +rcheckbox("us-sort-afk", "Расположить неактивных пользователей(афк) внизу списка")
       .col-sm-4
       .col-sm-8
-        p.text-info The following 3 options apply to how and when you will be notified if a new chat message is received while CyTube is not the active window.
+        p.text-info Следующие 3 параметра применяются к тому, как и когда вы будете получать уведомления о получении нового сообщения в чате.
       .form-group
-        label.control-label.col-sm-4(for="#us-blink-title") Blink page title on new messages
+        label.control-label.col-sm-4(for="#us-blink-title") Мигающий заголовок страницы при появлении новых сообщений
         .col-sm-8
           select#us-blink-title.form-control
-            option(value="never") Never
-            option(value="onlyping") Only when I am mentioned or PMed
-            option(value="always") Always
+            option(value="never") Никогда
+            option(value="onlyping") Только когда меня упоминают или когда пишут в лс
+            option(value="always") Всегда
       .form-group
-        label.control-label.col-sm-4(for="#us-ping-sound") Notification sound on new messages
+        label.control-label.col-sm-4(for="#us-ping-sound") Звуковое уведомления о новых сообщениях
         .col-sm-8
           select#us-ping-sound.form-control
-            option(value="never") Never
-            option(value="onlyping") Only when I am mentioned or PMed
-            option(value="always") Always
+            option(value="never") Никогда
+            option(value="onlyping") Только когда меня упоминают или когда пишут в лс
+            option(value="always") Всегда
       .form-group
-        label.control-label.col-sm-4(for="#us-notifications") Desktop notifications on new messages
+        label.control-label.col-sm-4(for="#us-notifications") Уведомления на рабочем столе о новых сообщениях
         .col-sm-8
           select#us-notifications.form-control
-            option(value="never") Never
-            option(value="onlyping") Only when I am mentioned or PMed
-            option(value="always") Always
-      +rcheckbox("us-sendbtn", "Add a send button to chat")
-      +rcheckbox("us-no-emotes", "Disable chat emotes")
-      +rcheckbox("us-strip-image", "Remove images from chat")
+            option(value="never") Никогда
+            option(value="onlyping") Только когда меня упоминают или когда пишут в лс
+            option(value="always") Всегда
+      +rcheckbox("us-sendbtn", "Добавить кнопку отправки в чат")
+      +rcheckbox("us-no-emotes", "Отключить эмоции в чате")
+      +rcheckbox("us-strip-image", "Удаление изображений из чата")
       .form-group
-        label.control-label.col-sm-4(for="#us-chat-tab-method") Tab completion method
+        label.control-label.col-sm-4(for="#us-chat-tab-method") Tab completion method(спросить у Исраила)
         .col-sm-8
           select#us-chat-tab-method.form-control
             option(value="Cycle options") Cycle options

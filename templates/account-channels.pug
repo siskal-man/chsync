@@ -19,12 +19,12 @@ block content
           p= deleteChannelError
       if channels.length == 0
         .center
-          strong У вас нет ни одного канала
+          strong Вы не зарегистрировали ни одного канала
       else
         table.table.table-bordered
           thead
             tr
-              th Канал
+              th Название канала
           tbody
             for c in channels
               tr
